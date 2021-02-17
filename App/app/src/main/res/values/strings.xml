@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Apiverte-Colony-Management</string>
+
+    ---Cynthia---
+    <string name="logo">APIVERTE</string>
+    <string name="select_user">Select User:</string>
+    <string name="sign_in">Sign In</string>
+    <string name="manage_users">Manage Users</string>
+
+    <string name="add_new_colony">Add New Colony</string>
+    <string name="typical_inspection">Typical Inspection</string>
+    <string name="special_inspection">Special Inspection</string>
+    <string name="reporting">Reporting</string>
+    -------------
+
+
 </resources>
