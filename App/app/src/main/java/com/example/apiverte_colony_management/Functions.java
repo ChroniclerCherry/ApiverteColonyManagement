@@ -17,7 +17,7 @@ public class Functions extends AppCompatActivity {
         Button sign_in = findViewById(R.id.add_new_colony);
         sign_in.setOnClickListener( new View.OnClickListener()
         {   public void onClick(View v) {
-            Intent goToAddNewColony = new Intent(Functions.this, AddNewColony.class);
+            Intent goToAddNewColony = new Intent(Functions.this, CreateColonyPage.class);
             startActivity(goToAddNewColony);
         } });
     }
