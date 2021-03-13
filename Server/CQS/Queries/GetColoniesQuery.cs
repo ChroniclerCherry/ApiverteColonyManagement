@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
 using Server.Queries.DTOs;
 
@@ -31,6 +32,7 @@ namespace Server.CQS.Queries
                     ColonyNumber = c.ColonyNumber,
                     ColonySource = c.ColonySource,
                     QueenType = c.QueenType,
+                    Markings = c.Markings,
                     GeneticBreed = c.GeneticBreed,
                     InstallationType = c.InstallationType,
                     AdditionalInfo = c.AdditionalInfo,

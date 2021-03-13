@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.DataModels.Colony;
-using Server.Queries.DTOs;
 
 namespace Server.CQS.Commands
 {
@@ -24,7 +21,7 @@ namespace Server.CQS.Commands
             }
             public async Task<Guid> Handle(EditColonyCommand request, CancellationToken cancellationToken)
             {
-                var colony = await _db.Colony.FirstOrDefaultAsync(c => c.Id == request.ColonyDto.Id);
+                var colony = await _db.Colony.FirstOrDefaultAsync(c => c.Id == request.ColonyDto.Id, cancellationToken: cancellationToken);
 
                 if (colony == null) return Guid.Empty;
 

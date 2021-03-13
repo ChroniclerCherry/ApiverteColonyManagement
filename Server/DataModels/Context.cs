@@ -13,6 +13,12 @@ namespace Server.DataModels
 
         public DbSet<Host> Host { get; set; }
 
+        public DbSet<User> User { get; set; }
+
+        public DbSet<TypicalInspection> TypicalInspection { get; set; }
+
+        public DbSet<SpecialInspection> SpecialInspection { get; set; }
+
         public Context()
         { }
 
