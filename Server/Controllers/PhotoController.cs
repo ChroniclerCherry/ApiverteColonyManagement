@@ -24,6 +24,7 @@ namespace Server.Controllers
         [HttpPost, Route("UploadColonyPhoto")]
         public async Task<IActionResult> UploadColonyPhoto(String ColonyId, IFormFile file)
         {
+            Directory.CreateDirectory(Path.Combine(_environment.ContentRootPath, "Filesystem/Colonies/"));
             string path = Path.Combine(_environment.ContentRootPath, "Filesystem/Colonies/" + ColonyId + Path.GetExtension(file.FileName));
             await using (var stream = new FileStream(path, FileMode.Create))
             {
@@ -45,6 +46,7 @@ namespace Server.Controllers
         [HttpPost, Route("UploadSpecialInpectionPhoto")]
         public async Task<IActionResult> UploadSpecialInpectionPhoto(String SpecialInspectionId, IFormFile file)
         {
+            Directory.CreateDirectory(Path.Combine(_environment.ContentRootPath, "Filesystem/SpecialInspections/"));
             string path = Path.Combine(_environment.ContentRootPath, "Filesystem/SpecialInspections/" + SpecialInspectionId + Path.GetExtension(file.FileName));
             await using (var stream = new FileStream(path, FileMode.Create))
             {
@@ -66,6 +68,7 @@ namespace Server.Controllers
         [HttpPost, Route("UploadTypicalInspectionPhoto")]
         public async Task<IActionResult> UploadTypicalInspectionPhoto(String TypicalInspectionId, IFormFile file)
         {
+            Directory.CreateDirectory(Path.Combine(_environment.ContentRootPath, "Filesystem/TypicalInspections/"));
             string path = Path.Combine(_environment.ContentRootPath, "Filesystem/TypicalInspections/" + TypicalInspectionId + Path.GetExtension(file.FileName));
             await using (var stream = new FileStream(path, FileMode.Create))
             {
