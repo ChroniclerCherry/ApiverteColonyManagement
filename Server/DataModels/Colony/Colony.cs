@@ -13,6 +13,7 @@ namespace Server.DataModels.Colony
         public DateTime LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
 
+        //Colony Location
         public Guid HostId { get; set; }
         public virtual Host Host { get; set; }
 
@@ -22,8 +23,12 @@ namespace Server.DataModels.Colony
         public int HiveNumber { get; set; }
 
         public string ColonyNumber { get; set; }
+
+        //Colony Characteristic
         public string ColonySource { get; set; }
         public string QueenType { get; set; }
+
+        public string Markings { get; set; }
 
         public string GeneticBreed { get; set; }
 
@@ -31,12 +36,14 @@ namespace Server.DataModels.Colony
 
         public string AdditionalInfo { get; set; }
 
+        //Colony Setup
         public DateTime InstallDate { get; set; }
 
         public string HiveType { get; set; }
         public string BroodChamberType { get; set; }
 
         public bool QueenExclude { get; set; }
+
 
     }
 

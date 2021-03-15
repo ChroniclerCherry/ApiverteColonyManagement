@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Server.Commands.AddLookups;
 using Server.Commands.EditLookups;
 using Server.CQS.Commands;
+using Server.CQS.DTOs;
 using Server.CQS.Queries;
-using Server.Queries.DTOs;
 using Server.Queries.GetLookups;
 
 namespace Server.Controllers

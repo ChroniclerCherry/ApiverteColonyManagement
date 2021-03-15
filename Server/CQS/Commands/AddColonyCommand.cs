@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Server.CQS.DTOs;
 using Server.DataModels;
 using Server.DataModels.Colony;
-using Server.Queries.DTOs;
 
 namespace Server.CQS.Commands
 {
@@ -33,6 +31,7 @@ namespace Server.CQS.Commands
                     ColonyNumber = request.ColonyDto.ColonyNumber,
                     ColonySource = request.ColonyDto.ColonySource,
                     QueenType = request.ColonyDto.QueenType,
+                    Markings = request.ColonyDto.Markings,
                     GeneticBreed = request.ColonyDto.GeneticBreed,
                     InstallationType = request.ColonyDto.InstallationType,
                     AdditionalInfo = request.ColonyDto.AdditionalInfo,

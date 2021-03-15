@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Server.DataModels;
@@ -9,9 +10,10 @@ using Server.DataModels;
 namespace Server.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210308193336_AddInspectionPhotosAndUsers")]
+    partial class AddInspectionPhotosAndUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 56, DateTimeKind.Local).AddTicks(4982));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 34, DateTimeKind.Local).AddTicks(4039));
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -48,7 +50,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 56, DateTimeKind.Local).AddTicks(5298));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 34, DateTimeKind.Local).AddTicks(4356));
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -87,7 +89,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 58, DateTimeKind.Local).AddTicks(1302));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 36, DateTimeKind.Local).AddTicks(2390));
 
                     b.Property<string>("GeneticBreed")
                         .HasColumnType("text");
@@ -120,10 +122,13 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 58, DateTimeKind.Local).AddTicks(1652));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 36, DateTimeKind.Local).AddTicks(2740));
 
                     b.Property<string>("Markings")
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("PhotoId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("QueenExclude")
                         .HasColumnType("boolean");
@@ -136,6 +141,8 @@ namespace Server.Migrations
                     b.HasIndex("AreaId");
 
                     b.HasIndex("HostId");
+
+                    b.HasIndex("PhotoId");
 
                     b.ToTable("Colony");
                 });
@@ -154,7 +161,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 60, DateTimeKind.Local).AddTicks(5459));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 38, DateTimeKind.Local).AddTicks(4234));
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -169,7 +176,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 60, DateTimeKind.Local).AddTicks(5796));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 38, DateTimeKind.Local).AddTicks(4577));
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -177,6 +184,45 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Host");
+                });
+
+            modelBuilder.Entity("Server.DataModels.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedBy")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("System");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 19, DateTimeKind.Local).AddTicks(8831));
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("LastModifiedBy")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("System");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 23, DateTimeKind.Local).AddTicks(2708));
+
+                    b.Property<string>("Path")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Photo");
                 });
 
             modelBuilder.Entity("Server.DataModels.SpecialInspection", b =>
@@ -196,7 +242,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 43, DateTimeKind.Local).AddTicks(5497));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 25, DateTimeKind.Local).AddTicks(2969));
 
                     b.Property<string[]>("Feeds")
                         .HasColumnType("text[]");
@@ -220,7 +266,10 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 48, DateTimeKind.Local).AddTicks(9790));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 25, DateTimeKind.Local).AddTicks(3334));
+
+                    b.Property<Guid?>("PhotoId")
+                        .HasColumnType("uuid");
 
                     b.Property<string[]>("TreatmentDetails")
                         .HasColumnType("text[]");
@@ -237,6 +286,8 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ColonyId");
+
+                    b.HasIndex("PhotoId");
 
                     b.HasIndex("UserID");
 
@@ -272,7 +323,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 53, DateTimeKind.Local).AddTicks(7439));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 31, DateTimeKind.Local).AddTicks(449));
 
                     b.Property<bool>("Excluder")
                         .HasColumnType("boolean");
@@ -308,13 +359,16 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 53, DateTimeKind.Local).AddTicks(7821));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 31, DateTimeKind.Local).AddTicks(807));
 
                     b.Property<string>("Mood")
                         .HasColumnType("text");
 
                     b.Property<bool>("MouseGuard")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid?>("PhotoId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("PollenCollector")
                         .HasColumnType("boolean");
@@ -347,6 +401,8 @@ namespace Server.Migrations
 
                     b.HasIndex("ColonyId");
 
+                    b.HasIndex("PhotoId");
+
                     b.HasIndex("UserID");
 
                     b.ToTable("TypicalInspection");
@@ -366,7 +422,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 55, DateTimeKind.Local).AddTicks(3029));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 33, DateTimeKind.Local).AddTicks(1635));
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -381,7 +437,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 55, DateTimeKind.Local).AddTicks(3352));
+                        .HasDefaultValue(new DateTime(2021, 3, 8, 14, 33, 36, 33, DateTimeKind.Local).AddTicks(1998));
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -405,9 +461,15 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.DataModels.Photo", "Photo")
+                        .WithMany("Colonies")
+                        .HasForeignKey("PhotoId");
+
                     b.Navigation("Area");
 
                     b.Navigation("Host");
+
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("Server.DataModels.SpecialInspection", b =>
@@ -418,11 +480,17 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.DataModels.Photo", "Photo")
+                        .WithMany("SpecialInspections")
+                        .HasForeignKey("PhotoId");
+
                     b.HasOne("Server.DataModels.User", "User")
                         .WithMany("SpecialInspections")
                         .HasForeignKey("UserID");
 
                     b.Navigation("Colony");
+
+                    b.Navigation("Photo");
 
                     b.Navigation("User");
                 });
@@ -435,11 +503,17 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.DataModels.Photo", "Photo")
+                        .WithMany("TypicalInspections")
+                        .HasForeignKey("PhotoId");
+
                     b.HasOne("Server.DataModels.User", "User")
                         .WithMany("TypicalInspections")
                         .HasForeignKey("UserID");
 
                     b.Navigation("Colony");
+
+                    b.Navigation("Photo");
 
                     b.Navigation("User");
                 });
@@ -452,6 +526,15 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.DataModels.Colony.Host", b =>
                 {
                     b.Navigation("Colonies");
+                });
+
+            modelBuilder.Entity("Server.DataModels.Photo", b =>
+                {
+                    b.Navigation("Colonies");
+
+                    b.Navigation("SpecialInspections");
+
+                    b.Navigation("TypicalInspections");
                 });
 
             modelBuilder.Entity("Server.DataModels.User", b =>

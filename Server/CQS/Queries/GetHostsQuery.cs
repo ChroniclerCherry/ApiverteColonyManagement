@@ -25,7 +25,8 @@ namespace Server.Queries.GetLookups
                 return await _db.Host.Select(a => new LookupDto()
                 {
                     Id = a.Id,
-                    Name = a.Name
+                    Name = a.Name,
+                    IsActive = a.IsActive
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

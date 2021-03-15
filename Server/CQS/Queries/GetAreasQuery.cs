@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.DataModels;
 using Server.Queries.DTOs;
 
-namespace Server.Queries.GetLookups
+namespace Server.CQS.Queries
 {
     public class GetAreasQuery : IRequest<IEnumerable<LookupDto>>
     {
@@ -24,7 +24,8 @@ namespace Server.Queries.GetLookups
                 return await _db.Area.Select(a => new LookupDto()
                 {
                     Id = a.Id,
-                    Name = a.Name
+                    Name = a.Name,
+                    IsActive = a.IsActive
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

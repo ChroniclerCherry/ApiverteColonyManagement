@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Server.Queries.DTOs
+namespace Server.CQS.DTOs
 {
     public class ColonyDto
     {
@@ -19,6 +16,8 @@ namespace Server.Queries.DTOs
         public string ColonyNumber { get; set; }
         public string ColonySource { get; set; }
         public string QueenType { get; set; }
+
+        public string Markings { get; set; }
 
         public string GeneticBreed { get; set; }
 
