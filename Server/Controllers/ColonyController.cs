@@ -13,7 +13,7 @@ using Server.Queries.GetLookups;
 namespace Server.Controllers
 {
     [Route("[controller]")]
-    public class ColonyController : ControllerBase
+    public class ColonyController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private IMediator _mediator;
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();

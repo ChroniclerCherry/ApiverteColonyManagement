@@ -33,7 +33,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetTypicalInspections")]
+        [HttpGet, Route("GetTypicalInspections")]
         public async Task<IActionResult> GetTypicalInspections()
         {
             var result = await Mediator.Send(new GetTypicalInspectionQuery());
@@ -60,7 +60,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetSpecialInspections")]
+        [HttpGet, Route("GetSpecialInspections")]
         public async Task<IActionResult> GetSpecialInspections()
         {
             var result = await Mediator.Send(new GetSpecialInspectionsQuery());
