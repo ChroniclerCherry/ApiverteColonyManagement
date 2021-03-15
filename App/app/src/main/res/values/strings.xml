@@ -6,6 +6,9 @@
     <string name="select_user">Select User:</string>
     <string name="sign_in">Sign In</string>
     <string name="manage_users">Manage Users</string>
+    <string name="add_user">Type new user name here</string>
+    <string name="back">Back</string>
+    <string name="add">Add</string>
 
     <string name="add_new_colony">Add New Colony</string>
     <string name="typical_inspection">Typical Inspection</string>
@@ -13,5 +16,31 @@
     <string name="reporting">Reporting</string>
     -------------
 
+    ---Dan---
+    <string name="createColonyPageHeader">Add New Colony</string>
+    <string name="createColonyPageInputHint">Enter data here</string>
+    <string name="createColonyPageLocationHeader">Location Data</string>
+    <string name="createColonyPageRowArea">Area</string>
+    <string name="createColonyPageRowHost">Host</string>
+    <string name="createColonyPageRowHiveNum">Hive Number</string>
+    <string name="createColonyPageRowColonyNum">Colony Number</string>
+    <string name="createColonyPageCharacteristicsHeader">Colony Characteristics</string>
+    <string name="createColonyPageRowColonySource">Colony Source</string>
+    <string name="createColonyPageRowQueen">Queen</string>
+    <string name="createColonyPageRowGenetics">Colony Genetics</string>
+    <string name="createColonyPageRowInstallation">Installation Type</string>
+    <string name="createColonyPageRowAddInfo">Additional Info</string>
+    <string name="createColonyPageSetupHeader">Colony Setup</string>
+    <string name="createColonyPageRowInstallDate">Installation Date</string>
+    <string name="createColonyPageRowInstallDateButton">Select Date</string>
+    <string name="createColonyPageRowHiveType">Hive Type</string>
+    <string name="createColonyPageRowBroodChamber">Brood Chamber</string>
+    <string name="createColonyPageRowQueenExcluder">Queen Excluder</string>
+    <string name="createColonyPageRowAddPhoto">Add Photo</string>
+    <string name="createColonyPagePhotoDescription">Current Colony Photo</string>
+    <string name="createColonyPageSubmitButton">Add Colony</string>
+    <string name="createColonyPageReturnButton">Return to Menu</string>
+    <string name="createColonyPageSubmitMessage">Colony Created!</string>
+    -------------
 
 </resources>
