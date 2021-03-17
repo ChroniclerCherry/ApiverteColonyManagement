@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TypicalInspection"></activity>
+        <activity android:name=".IdentifyColony" />
         <activity android:name=".Functions" />
         <activity android:name=".MainActivity">
             <intent-filter>
