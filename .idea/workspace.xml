@@ -27,18 +27,17 @@
         <item name="GROUP_NODE:Add" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e9a5a94-0307-4bb1-9d9e-7ac44e525ee9" name="Default Changelist" comment="Commit 1 - Basic outline of Room DB utility.">
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/ColonyData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/ColonyDataDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/ColonyDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/EditColonyPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/res/layout/activity_edit_colony.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cst8334-21w-320-team5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cst8334-21w-320-team5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/CreateColonyPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/CreateColonyPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +170,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

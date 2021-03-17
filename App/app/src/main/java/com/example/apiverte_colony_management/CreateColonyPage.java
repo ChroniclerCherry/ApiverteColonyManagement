@@ -32,6 +32,7 @@ public class CreateColonyPage extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_colony);
+        String userName = getIntent().getStringExtra("EXTRA_SESSION_ID");
 
         //Populate lists for spinner selection
         //Note: Will be replaced by DB query results
