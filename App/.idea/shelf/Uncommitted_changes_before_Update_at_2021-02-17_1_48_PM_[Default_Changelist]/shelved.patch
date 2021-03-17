@@ -1,0 +1,594 @@
+Index: app/src/main/java/com/example/apiverte_colony_management/CreateColonyPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.apiverte_colony_management;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class CreateColonyPage extends Activity {\r\n\r\n    //Declare needed lists/variables\r\n    ArrayList<String> areaList = new ArrayList<>();\r\n    List<String> hostList = new ArrayList<>();\r\n    List<String> hiveNumList = new ArrayList<>();\r\n    List<String> queenList = new ArrayList<>();\r\n    List<String> geneticsList = new ArrayList<>();\r\n    List<String> installTypeList = new ArrayList<>();\r\n    List<String> hiveTypeList = new ArrayList<>();\r\n    List<String> broodChamberList = new ArrayList<>();\r\n    List<String> queenExcluderList = new ArrayList<>();\r\n\r\n    //col short for 'colony'\r\n    String colArea, colHost, colSource, colQueen, colGenetics, colInstall, colHiveType, colBroodChamber, colQueenExcluder;\r\n    int colNum, colHiveNum;\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_create_colony);\r\n\r\n        //Populate lists for spinner selection\r\n        //Note: Will be replaced by DB query results\r\n        areaList.add(\"Area1\");\r\n        areaList.add(\"Area2\");\r\n        areaList.add(\"Area3\");\r\n        areaList.add(\"Area4\");\r\n        areaList.add(\"Add New...\");\r\n\r\n        hostList.add(\"Host1\");\r\n        hostList.add(\"Host2\");\r\n        hostList.add(\"Host3\");\r\n        hostList.add(\"Host4\");\r\n        hostList.add(\"Add New...\");\r\n\r\n        hiveNumList.add(\"Hive1\");\r\n        hiveNumList.add(\"Hive2\");\r\n        hiveNumList.add(\"Hive3\");\r\n        hiveNumList.add(\"Hive4\");\r\n        hiveNumList.add(\"Hive5\");\r\n\r\n        queenList.add(\"Marked\");\r\n        queenList.add(\"Clipped\");\r\n        queenList.add(\"Not Marked\");\r\n\r\n        geneticsList.add(\"Breed1\");\r\n        geneticsList.add(\"Breed2\");\r\n        geneticsList.add(\"Breed3\");\r\n        geneticsList.add(\"Breed4\");\r\n\r\n        installTypeList.add(\"Type1\");\r\n        installTypeList.add(\"Type2\");\r\n        installTypeList.add(\"Type3\");\r\n        installTypeList.add(\"Type4\");\r\n\r\n        hiveTypeList.add(\"Type1\");\r\n        hiveTypeList.add(\"Type2\");\r\n        hiveTypeList.add(\"Type3\");\r\n        hiveTypeList.add(\"Type4\");\r\n\r\n        broodChamberList.add(\"Brood1\");\r\n        broodChamberList.add(\"Brood2\");\r\n        broodChamberList.add(\"Brood3\");\r\n        broodChamberList.add(\"Brood4\");\r\n\r\n        queenExcluderList.add(\"Excluder1\");\r\n        queenExcluderList.add(\"Excluder2\");\r\n        queenExcluderList.add(\"Excluder3\");\r\n        queenExcluderList.add(\"Excluder4\");\r\n\r\n\r\n        //Create the areaList spinner\r\n        ArrayAdapter<String> areaAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, areaList);\r\n        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner areaSpinner = findViewById(R.id.createAreaSpinner);\r\n        areaSpinner.setAdapter(areaAdapter);\r\n\r\n        //Create the hostList spinner\r\n        ArrayAdapter<String> hostAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, hostList);\r\n        hostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner hostSpinner = findViewById(R.id.createHostSpinner);\r\n        hostSpinner.setAdapter(hostAdapter);\r\n\r\n        //Create the hiveNumList spinner\r\n        ArrayAdapter<String> hiveNumAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, hiveNumList);\r\n        hiveNumAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner hiveNumSpinner = findViewById(R.id.createHiveNumSpinner);\r\n        hiveNumSpinner.setAdapter(hiveNumAdapter);\r\n\r\n        //Create the queenList spinner\r\n        ArrayAdapter<String> queenAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, queenList);\r\n        queenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner queenSpinner = findViewById(R.id.createQueenSpinner);\r\n        queenSpinner.setAdapter(queenAdapter);\r\n\r\n        //Create the colonyGeneticsList spinner\r\n        ArrayAdapter<String> geneticsAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, geneticsList);\r\n        geneticsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner geneticsSpinner = findViewById(R.id.createGeneticsSpinner);\r\n        geneticsSpinner.setAdapter(geneticsAdapter);\r\n\r\n        //Create the installTypeList spinner\r\n        ArrayAdapter<String> installAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, installTypeList);\r\n        installAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner installSpinner = findViewById(R.id.createInstallationSpinner);\r\n        installSpinner.setAdapter(installAdapter);\r\n\r\n        //Create the hiveTypeList spinner\r\n        ArrayAdapter<String> hiveTypeAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, hiveTypeList);\r\n        hiveTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner hiveTypeSpinner = findViewById(R.id.createHiveTypeSpinner);\r\n        hiveTypeSpinner.setAdapter(hiveTypeAdapter);\r\n\r\n        //Create the broodChamberList spinner\r\n        ArrayAdapter<String> broodChamberAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodChamberList);\r\n        broodChamberAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner broodChamberSpinner = findViewById(R.id.createBroodChamberSpinner);\r\n        broodChamberSpinner.setAdapter(broodChamberAdapter);\r\n\r\n        //Create the queenExcluderList spinner\r\n        ArrayAdapter<String> queenExcluderAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, queenExcluderList);\r\n        queenExcluderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        Spinner queenExcluderSpinner = findViewById(R.id.createQueenExcluderSpinner);\r\n        queenExcluderSpinner.setAdapter(queenExcluderAdapter);\r\n\r\n\r\n        //Create Back and Submit buttons\r\n        Button submitButton = findViewById(R.id.createColonySubmitButton);\r\n        submitButton.setOnClickListener(v -> {\r\n            Intent refresh = getIntent();\r\n            finish();\r\n            startActivity(refresh);\r\n            Toast.makeText(this, R.string.createColonyPageSubmitMessage, Toast.LENGTH_SHORT).show();\r\n        });\r\n\r\n        Button returnButton = findViewById(R.id.createColonyReturnButton);\r\n        returnButton.setOnClickListener(v -> {\r\n            Intent returnToMenu = new Intent(this, Functions.class);\r\n            startActivity(returnToMenu);\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/apiverte_colony_management/CreateColonyPage.java	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ app/src/main/java/com/example/apiverte_colony_management/CreateColonyPage.java	(date 1613570854591)
+@@ -147,10 +147,12 @@
+             Toast.makeText(this, R.string.createColonyPageSubmitMessage, Toast.LENGTH_SHORT).show();
+         });
+ 
++            /*
+         Button returnButton = findViewById(R.id.createColonyReturnButton);
+         returnButton.setOnClickListener(v -> {
+             Intent returnToMenu = new Intent(this, Functions.class);
+             startActivity(returnToMenu);
+         });
++        */
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_create_colony.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:gravity=\"center\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/createPageHeader\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"35sp\"\r\n        android:textColor=\"#09AB4D\"\r\n        android:text=\"@string/createColonyPageHeader\"\r\n        />\r\n\r\n    <GridLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:columnCount=\"2\"\r\n        android:rowCount=\"2\"\r\n        android:padding=\"5dp\"\r\n        >\r\n\r\n        <TextView\r\n            android:id=\"@+id/createLocationCategoryHeader\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageLocationHeader\"\r\n            android:textSize=\"25sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnSpan=\"2\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createAreaRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowArea\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\" />\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createAreaSpinner\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createHostRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowHost\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createHostSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createHiveNumRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowHiveNum\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createHiveNumSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyNumRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowColonyNum\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <EditText\r\n            android:id=\"@+id/createColonyNumInput\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:hint=\"@string/createColonyPageInputHint\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\"\r\n            android:inputType=\"number\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/createSpacer1\"\r\n            android:layout_height=\"20dp\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_columnSpan=\"2\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createCharacteristicsCategoryHeader\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageCharacteristicsHeader\"\r\n            android:textSize=\"25sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnSpan=\"2\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonySourceRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowColonySource\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <EditText\r\n            android:id=\"@+id/createColonySourceInput\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:hint=\"@string/createColonyPageInputHint\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\"\r\n            android:inputType=\"textCapSentences|textAutoComplete\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/createQueenRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowQueen\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createQueenSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createGeneticsRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowGenetics\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createGeneticsSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createInstallationRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowInstallation\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createInstallationSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyAddInfoRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowAddInfo\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <EditText\r\n            android:id=\"@+id/createColonyAdditionalInfoEditText\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:hint=\"@string/createColonyPageInputHint\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\"\r\n            android:inputType=\"textCapSentences|textAutoComplete\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/createSpacer2\"\r\n            android:layout_height=\"20dp\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_columnSpan=\"2\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createSetupCategoryHeader\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageSetupHeader\"\r\n            android:textSize=\"25sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnSpan=\"2\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyInstallDateRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowInstallDate\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <EditText\r\n            android:id=\"@+id/createColonyInstallDateEditText\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:hint=\"@string/createColonyPageInputHint\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\"\r\n            android:inputType=\"date\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyHiveTypeRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowHiveType\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createHiveTypeSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyBroodChamberRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowBroodChamber\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createBroodChamberSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyQueenExcluderRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowQueenExcluder\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/createQueenExcluderSpinner\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:textSize=\"20sp\"\r\n            android:layout_columnWeight=\"5\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/createColonyAddPhotoRow\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:text=\"@string/createColonyPageRowAddPhoto\"\r\n            android:textSize=\"20sp\"\r\n            android:textColor=\"#09AB4D\"\r\n            android:layout_columnWeight=\"1\"/>\r\n\r\n        <ImageView\r\n            android:id=\"@+id/createAddedPhotoImage\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_columnWeight=\"5\"\r\n            android:src=\"android.R.drawable.ic_camera.xml\"\r\n            android:contentDescription=\"@string/createColonyPagePhotoDescription\" />\r\n\r\n    </GridLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/createSpacer3\"\r\n        android:layout_height=\"20dp\"\r\n        android:layout_width=\"match_parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/createColonySubmitButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"20sp\"\r\n        android:text=\"@string/createColonyPageSubmitButton\"\r\n        android:background=\"#09AB4D\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:padding=\"5dp\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/createSpacer4\"\r\n        android:layout_height=\"10dp\"\r\n        android:layout_width=\"match_parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/createColonyReturnButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"20sp\"\r\n        android:text=\"@string/createColonyPageReturnButton\"\r\n        android:background=\"#09AB4D\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:padding=\"5dp\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_create_colony.xml	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ app/src/main/res/layout/activity_create_colony.xml	(date 1613570698863)
+@@ -1,329 +1,326 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:orientation="vertical"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:gravity="center">
++    android:gravity="center"
++    android:orientation="vertical">
+ 
+     <TextView
+         android:id="@+id/createPageHeader"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:textSize="35sp"
+-        android:textColor="#09AB4D"
+         android:text="@string/createColonyPageHeader"
+-        />
++        android:textColor="#09AB4D"
++        android:textSize="35sp" />
+ 
+     <GridLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:columnCount="2"
+-        android:rowCount="2"
+         android:padding="5dp"
+-        >
++        android:rowCount="2">
+ 
+         <TextView
+             android:id="@+id/createLocationCategoryHeader"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnSpan="2"
+             android:text="@string/createColonyPageLocationHeader"
+-            android:textSize="25sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnSpan="2" />
++            android:textSize="25sp" />
+ 
+         <TextView
+             android:id="@+id/createAreaRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowArea"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1" />
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createAreaSpinner"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createHostRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowHost"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createHostSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createHiveNumRow"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowHiveNum"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createHiveNumSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyNumRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowColonyNum"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <EditText
+             android:id="@+id/createColonyNumInput"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="5"
+             android:hint="@string/createColonyPageInputHint"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5"
+-            android:inputType="number"/>
++            android:inputType="number"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createSpacer1"
+-            android:layout_height="20dp"
+             android:layout_width="match_parent"
++            android:layout_height="20dp"
+             android:layout_columnSpan="2" />
+ 
+         <TextView
+             android:id="@+id/createCharacteristicsCategoryHeader"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnSpan="2"
+             android:text="@string/createColonyPageCharacteristicsHeader"
+-            android:textSize="25sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnSpan="2" />
++            android:textSize="25sp" />
+ 
+         <TextView
+             android:id="@+id/createColonySourceRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowColonySource"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <EditText
+             android:id="@+id/createColonySourceInput"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+-            android:hint="@string/createColonyPageInputHint"
+-            android:textSize="20sp"
++            android:layout_height="wrap_content"
+             android:layout_columnWeight="5"
+-            android:inputType="textCapSentences|textAutoComplete"/>
++            android:hint="@string/createColonyPageInputHint"
++            android:inputType="textCapSentences|textAutoComplete"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createQueenRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowQueen"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createQueenSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createGeneticsRow"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowGenetics"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createGeneticsSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createInstallationRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowInstallation"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createInstallationSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyAddInfoRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowAddInfo"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <EditText
+             android:id="@+id/createColonyAdditionalInfoEditText"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+-            android:hint="@string/createColonyPageInputHint"
+-            android:textSize="20sp"
++            android:layout_height="wrap_content"
+             android:layout_columnWeight="5"
+-            android:inputType="textCapSentences|textAutoComplete"/>
++            android:hint="@string/createColonyPageInputHint"
++            android:inputType="textCapSentences|textAutoComplete"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createSpacer2"
+-            android:layout_height="20dp"
+             android:layout_width="match_parent"
++            android:layout_height="20dp"
+             android:layout_columnSpan="2" />
+ 
+         <TextView
+             android:id="@+id/createSetupCategoryHeader"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnSpan="2"
+             android:text="@string/createColonyPageSetupHeader"
+-            android:textSize="25sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnSpan="2" />
++            android:textSize="25sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyInstallDateRow"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowInstallDate"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <EditText
+             android:id="@+id/createColonyInstallDateEditText"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+-            android:hint="@string/createColonyPageInputHint"
+-            android:textSize="20sp"
++            android:layout_height="wrap_content"
+             android:layout_columnWeight="5"
+-            android:inputType="date"/>
++            android:hint="@string/createColonyPageInputHint"
++            android:inputType="date"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyHiveTypeRow"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowHiveType"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createHiveTypeSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyBroodChamberRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowBroodChamber"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createBroodChamberSpinner"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyQueenExcluderRow"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowQueenExcluder"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <Spinner
+             android:id="@+id/createQueenExcluderSpinner"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
+-            android:textSize="20sp"
+-            android:layout_columnWeight="5" />
++            android:layout_columnWeight="5"
++            android:textSize="20sp" />
+ 
+         <TextView
+             android:id="@+id/createColonyAddPhotoRow"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_width="wrap_content"
++            android:layout_columnWeight="1"
+             android:text="@string/createColonyPageRowAddPhoto"
+-            android:textSize="20sp"
+             android:textColor="#09AB4D"
+-            android:layout_columnWeight="1"/>
++            android:textSize="20sp" />
+ 
+         <ImageView
+             android:id="@+id/createAddedPhotoImage"
+-            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
+             android:layout_columnWeight="5"
+-            android:src="android.R.drawable.ic_camera.xml"
+-            android:contentDescription="@string/createColonyPagePhotoDescription" />
++            android:contentDescription="@string/createColonyPagePhotoDescription"/>
+ 
+     </GridLayout>
+ 
+     <TextView
+         android:id="@+id/createSpacer3"
+-        android:layout_height="20dp"
+-        android:layout_width="match_parent" />
++        android:layout_width="match_parent"
++        android:layout_height="20dp" />
+ 
+     <Button
+         android:id="@+id/createColonySubmitButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:textSize="20sp"
++        android:background="#09AB4D"
++        android:padding="5dp"
+         android:text="@string/createColonyPageSubmitButton"
+-        android:background="#09AB4D"
+         android:textColor="#FFFFFF"
+-        android:padding="5dp" />
++        android:textSize="20sp" />
+ 
+     <TextView
+         android:id="@+id/createSpacer4"
+-        android:layout_height="10dp"
+-        android:layout_width="match_parent" />
++        android:layout_width="match_parent"
++        android:layout_height="10dp" />
+ 
+     <Button
+         android:id="@+id/createColonyReturnButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:textSize="20sp"
++        android:background="#09AB4D"
++        android:padding="5dp"
+         android:text="@string/createColonyPageReturnButton"
+-        android:background="#09AB4D"
+         android:textColor="#FFFFFF"
+-        android:padding="5dp"/>
++        android:textSize="20sp" />
+ 
+ </LinearLayout>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ .idea/gradle.xml	(date 1613570659911)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ .idea/misc.xml	(date 1613570659941)
+@@ -1,4 +1,4 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1613570659932)
++++ .idea/vcs.xml	(date 1613570659932)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.1\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.apiverte_colony_management\"\r\n        minSdkVersion 21\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ app/build.gradle	(date 1613570659945)
+@@ -20,6 +20,10 @@
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_1_8
++        targetCompatibility JavaVersion.VERSION_1_8
++    }
+ }
+ 
+ dependencies {
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Feb 04 15:39:42 EST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.1.1-all.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1613570659950)
+@@ -1,6 +1,6 @@
+-#Thu Feb 04 15:39:42 EST 2021
++#Wed Feb 17 09:03:44 EST 2021
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n    dependencies {\r\n        classpath \"com.android.tools.build:gradle:4.0.0\"\r\n\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision cedb708de48b72abecb5b29232dc74820a37d623)
++++ build.gradle	(date 1613570659955)
+@@ -5,7 +5,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath "com.android.tools.build:gradle:4.0.0"
++        classpath 'com.android.tools.build:gradle:4.1.2'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1613570659937)
++++ .idea/compiler.xml	(date 1613570659937)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
