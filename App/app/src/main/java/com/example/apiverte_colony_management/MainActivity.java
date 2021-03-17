@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] users = new String[usersList.size()];
         int i = 0;
         for(Users element: usersList) {
-            users[i] = element.getUserName();
+            users[i] = element.getName();
             i++;
         }
 
@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         sign_in.setOnClickListener( new View.OnClickListener()
         {   public void onClick(View v) {
             Intent goToFunctions = new Intent(MainActivity.this, Functions.class);
+            Spinner user = (Spinner) findViewById(R.id.spinner);
+            goToFunctions.putExtra("USER", user.getSelectedItem().toString());
             startActivity(goToFunctions);
         } });
 
@@ -64,30 +66,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         UsersMyOpener dbOpener = new UsersMyOpener(this);
         db = dbOpener.getWritableDatabase();
 
-        // We want to get all of the columns. Look at UsersMyOpener.java for the definitions:
-        String [] columns = {UsersMyOpener.COL_ID, UsersMyOpener.COL_NAME};
+        // We want to get all of the columns. Look at MyOpener.java for the definitions:
+        String [] columns = {UsersMyOpener.COL_ID, UsersMyOpener.COL_NAME, UsersMyOpener.COL_CREATEDBY, UsersMyOpener.COL_CREATEDDATE,UsersMyOpener.COL_LASTMODIFIEDBY, UsersMyOpener.COL_LASTMODIFIEDDATE, UsersMyOpener.COL_ISACTIVE};
         //query all the results from the database:
-        Cursor results = db.query(false, UsersMyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+        Cursor results = db.query(false, UsersMyOpener.TABLE_NAME, columns, UsersMyOpener.COL_ISACTIVE + "= 'true'", null, null, null, null, null);
 
         //Now the results object has rows of results that match the query.
         //find the column indices:
         int idColIndex = results.getColumnIndex(UsersMyOpener.COL_ID);
         int nameColumnIndex = results.getColumnIndex(UsersMyOpener.COL_NAME);
+        int createdByColIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDBY);
+        int createdDateColumnIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDDATE);
+        int lastModifiedByColIndex = results.getColumnIndex(UsersMyOpener.COL_LASTMODIFIEDBY);
+        int lastModifiedDateColumnIndex = results.getColumnIndex(UsersMyOpener.COL_LASTMODIFIEDDATE);
+        int isActiveColIndex = results.getColumnIndex(UsersMyOpener.COL_ISACTIVE);
 
         //iterate over the results, return true if there is a next item:
         while(results.moveToNext())
         {
             long id = results.getLong(idColIndex);
             String name = results.getString(nameColumnIndex);
+            String createdBy = results.getString(createdByColIndex);
+            String createdDate = results.getString(createdDateColumnIndex);
+            String lastModifiedBy = results.getString(lastModifiedByColIndex);
+            String lastModifiedDate = results.getString(lastModifiedDateColumnIndex);
+            String isActive = results.getString(isActiveColIndex);
 
             //add the new Contact to the array list:
-            usersList.add(new Users(id, name));
+            usersList.add(new Users(id, name, createdBy, createdDate, lastModifiedBy, lastModifiedDate, isActive));
         }
 
         if(usersList.size() == 0) {
-            usersList.add(new Users(0, "No user in the database"));
+            usersList.add(new Users(0, "No user in the database", null, null, null, null, null));
         }
-        //At this point, the usersList array has loaded every row from the cursor.
+        //At this point, the contactsList array has loaded every row from the cursor.
     }
 
     @Override
@@ -107,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] users = new String[usersList.size()];
         int i = 0;
         for(Users element: usersList) {
-            users[i] = element.getUserName();
+            users[i] = element.getName();
             i++;
         }
 
@@ -123,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] users = new String[usersList.size()];
         int i = 0;
         for(Users element: usersList) {
-            users[i] = element.getUserName();
+            users[i] = element.getName();
             i++;
         }
 

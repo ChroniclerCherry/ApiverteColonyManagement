@@ -18,6 +18,16 @@ public class UsersMyOpener extends SQLiteOpenHelper {
 
     public final static String COL_NAME = "USERNAME";
 
+    public final static String COL_CREATEDBY = "CREATEDBY";
+
+    public final static String COL_CREATEDDATE = "CREATEDDATE";
+
+    public final static String COL_LASTMODIFIEDBY = "LASTMODIFIEDBY";
+
+    public final static String COL_LASTMODIFIEDDATE = "LASTMODIFIEDDATE";
+
+    public final static String COL_ISACTIVE = "ISACTIVE";
+
     public UsersMyOpener(Context ctx)
     {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
@@ -28,7 +38,12 @@ public class UsersMyOpener extends SQLiteOpenHelper {
     {
 
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COL_NAME  + " text);");
+                + COL_NAME + " text,"
+                + COL_CREATEDBY + " text,"
+                + COL_CREATEDDATE + " text,"
+                + COL_LASTMODIFIEDBY + " text,"
+                + COL_LASTMODIFIEDDATE + " text,"
+                + COL_ISACTIVE  + " text);");
 
 //        db.execSQL("INSERT INTO " + TABLE_NAME + " (_id, USERNAME)" +
 //                " VALUES (1, 'Oliver Smith');");

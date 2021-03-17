@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.apiverte_colony_management.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ManageUsers extends AppCompatActivity {
@@ -78,7 +80,7 @@ public class ManageUsers extends AppCompatActivity {
         add.setOnClickListener( (click) -> {
             EditText mEdit = (EditText) findViewById(R.id.add_user);
             long id = insertItem(mEdit.getText().toString());
-            Users user = new Users(id, mEdit.getText().toString());
+            Users user = new Users(id, mEdit.getText().toString(), "System", String.valueOf(LocalDateTime.now()), "System", "", "true");
             usersList.add(user);
             mEdit.setText(null);
             UserListview.setAdapter(new MyListAdapter());
@@ -99,23 +101,33 @@ public class ManageUsers extends AppCompatActivity {
         db = dbOpener.getWritableDatabase();
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String [] columns = {UsersMyOpener.COL_ID, UsersMyOpener.COL_NAME};
+        String [] columns = {UsersMyOpener.COL_ID, UsersMyOpener.COL_NAME, UsersMyOpener.COL_CREATEDBY, UsersMyOpener.COL_CREATEDDATE,UsersMyOpener.COL_LASTMODIFIEDBY, UsersMyOpener.COL_LASTMODIFIEDDATE, UsersMyOpener.COL_ISACTIVE};
         //query all the results from the database:
-        Cursor results = db.query(false, UsersMyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+        Cursor results = db.query(false, UsersMyOpener.TABLE_NAME, columns, UsersMyOpener.COL_ISACTIVE + "= 'true'", null, null, null, null, null);
 
         //Now the results object has rows of results that match the query.
         //find the column indices:
         int idColIndex = results.getColumnIndex(UsersMyOpener.COL_ID);
         int nameColumnIndex = results.getColumnIndex(UsersMyOpener.COL_NAME);
+        int createdByColIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDBY);
+        int createdDateColumnIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDDATE);
+        int lastModifiedByColIndex = results.getColumnIndex(UsersMyOpener.COL_LASTMODIFIEDBY);
+        int lastModifiedDateColumnIndex = results.getColumnIndex(UsersMyOpener.COL_LASTMODIFIEDDATE);
+        int isActiveColIndex = results.getColumnIndex(UsersMyOpener.COL_ISACTIVE);
 
         //iterate over the results, return true if there is a next item:
         while(results.moveToNext())
         {
             long id = results.getLong(idColIndex);
             String name = results.getString(nameColumnIndex);
+            String createdBy = results.getString(createdByColIndex);
+            String createdDate = results.getString(createdDateColumnIndex);
+            String lastModifiedBy = results.getString(lastModifiedByColIndex);
+            String lastModifiedDate = results.getString(lastModifiedDateColumnIndex);
+            String isActive = results.getString(isActiveColIndex);
 
             //add the new Contact to the array list:
-            usersList.add(new Users(id, name));
+            usersList.add(new Users(id, name, createdBy, createdDate, lastModifiedBy, lastModifiedDate, isActive));
         }
 
         if(usersList.size() == 0) {
@@ -149,21 +161,30 @@ public class ManageUsers extends AppCompatActivity {
             View newView = inflater.inflate(R.layout.activity_userlistview, null);
             TextView theText = newView.findViewById(R.id.userlistview);
             theText.setTextSize(60);
-            theText.setText("User " + item.getId() + " : " + item.getUserName());
+            theText.setText("User " + item.getId() + " : " + item.getName());
             return newView;
         }
     }
 
     protected void deleteItem(Users c)
     {
-        db.delete(UsersMyOpener.TABLE_NAME, "_id=?", new String[] { Long.toString(c.getId()) } );
+        //db.delete(UsersMyOpener.TABLE_NAME, "_id=?", new String[] { Long.toString(c.getId()) } );
+        ContentValues dataToInsert = new ContentValues();
+        dataToInsert.put(UsersMyOpener.COL_ISACTIVE, "false");
+        dataToInsert.put(UsersMyOpener.COL_LASTMODIFIEDDATE, String.valueOf(LocalDateTime.now()));
+        db.update(UsersMyOpener.TABLE_NAME, dataToInsert,UsersMyOpener.COL_ID + "= ?", new String[] {Long.toString(c.getId())});
     }
 
     protected long insertItem(String name)
     {
-        ContentValues cv = new ContentValues(); // a new row in the database
+        ContentValues cv = new ContentValues();
         cv.put(UsersMyOpener.COL_NAME, name);
-        long id = db.insert(UsersMyOpener.TABLE_NAME, UsersMyOpener.COL_NAME, cv);
+        cv.put(UsersMyOpener.COL_CREATEDBY, "System");
+        cv.put(UsersMyOpener.COL_CREATEDDATE, String.valueOf(LocalDateTime.now()));
+        cv.put(UsersMyOpener.COL_LASTMODIFIEDBY, "System");
+        cv.put(UsersMyOpener.COL_LASTMODIFIEDDATE, "");
+        cv.put(UsersMyOpener.COL_ISACTIVE, "true");
+        long id = db.insert(UsersMyOpener.TABLE_NAME, UsersMyOpener.COL_CREATEDBY, cv);
         return id;
     }
 }
