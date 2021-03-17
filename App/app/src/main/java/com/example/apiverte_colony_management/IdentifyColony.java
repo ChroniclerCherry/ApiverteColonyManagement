@@ -49,14 +49,16 @@ public class IdentifyColony extends AppCompatActivity {
         typicalInspectionButton = findViewById(R.id.typicalInspectionButton);
         pastInspectionsButton = findViewById(R.id.pastInspectionsButton);
 
-        area.add("Area1");
+        area.add("Area-1");
+        area.add("Area-2");
+        area.add("Area-4");
         ArrayAdapter<String> areaAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, area);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner areaSpinner = (Spinner)findViewById(R.id.areaSpinner);
         areaSpinner.setAdapter(areaAdapter);
 
 
-        host.add("Host1");
+        host.add("Host-2");
         ArrayAdapter<String> hostAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, host);
         hostAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner hostSpinner = (Spinner)findViewById(R.id.hostSpinner);
@@ -68,7 +70,9 @@ public class IdentifyColony extends AppCompatActivity {
         Spinner hiveNumSpinner = (Spinner)findViewById(R.id.HiveNumberSpinner);
         hiveNumSpinner.setAdapter(hiveNumAdapter);
 
-        colony.add("Colony1");
+        colony.add("Colony4");
+        colony.add("Colony2");
+        colony.add("Colony99");
         ArrayAdapter<String> colonyAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, colony);
         colonyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner colonySpinner = (Spinner)findViewById(R.id.colonyNumberSpinner);

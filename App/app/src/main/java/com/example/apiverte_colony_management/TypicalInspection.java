@@ -3,7 +3,9 @@ package com.example.apiverte_colony_management;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,7 +31,7 @@ public class TypicalInspection extends AppCompatActivity {
     private  String[] vents = {
             "None", "Upper", "Enterance", "Closed"
     };
-    private  String[] broadPattern = {
+    private  String[] broodPattern = {
             "Poor", "spotty", "pinhole", "solid"
     };
     private  String[] status = {
@@ -62,7 +64,81 @@ public class TypicalInspection extends AppCompatActivity {
         String date = dateF.format(Calendar.getInstance().getTime());
         String time = timeF.format(Calendar.getInstance().getTime());
 
-        autoD8.setText(time);
+        autoD8.setText(date);
         autoTime.setText(time);
+
+        /*
+        Setting Spinner values for Typical Inspection activity
+        ------
+        Typical Inspection
+         */
+        ArrayAdapter<String> populationAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, population);
+        populationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner populationSpinner = (Spinner)findViewById(R.id.populationSpinner);
+        populationSpinner.setAdapter(populationAdapter);
+
+        ArrayAdapter<String> moodAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, mood);
+        moodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner moodSpinner = (Spinner)findViewById(R.id.moodSpinner);
+        moodSpinner.setAdapter(populationAdapter);
+
+        ArrayAdapter<String> fitnessAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, fitness);
+        fitnessAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner fitnessSpinner = (Spinner)findViewById(R.id.fitnessSpinner);
+        fitnessSpinner.setAdapter(populationAdapter);
+
+        /*
+        Hive Bodies
+         */
+        ArrayAdapter<String> broodChambersAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodChambers);
+        broodChambersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner broodChambersSpinner = (Spinner)findViewById(R.id.broodChamberSpinner);
+        broodChambersSpinner.setAdapter(populationAdapter);
+
+        ArrayAdapter<String> honeyChambersAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, honeyChamber);
+        honeyChambersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner honeyChambersSpinner = (Spinner)findViewById(R.id.honeyChamberSpinner);
+        honeyChambersSpinner.setAdapter(populationAdapter);
+
+        ArrayAdapter<String> ventsAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, vents);
+        ventsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner ventsSpinner = (Spinner)findViewById(R.id.ventsSpinner);
+        ventsSpinner.setAdapter(populationAdapter);
+
+        /*
+        Frames
+         */
+        ArrayAdapter<String> broadPatternAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodPattern);
+        broadPatternAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner broadPatternSpinner = (Spinner)findViewById(R.id.broodPatternSpinner);
+        broadPatternSpinner.setAdapter(broadPatternAdapter);
+
+        /*
+        Modifications
+         */
+
+        //
+        // -------------------------Multi select options-----------------------------------
+        //
+
+        /*
+        Queen
+         */
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, status);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner statusSpinner = (Spinner)findViewById(R.id.statusSpinner);
+        statusSpinner.setAdapter(statusAdapter);
+
+        ArrayAdapter<String> cellsAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, cells);
+        cellsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner cellsSpinner = (Spinner)findViewById(R.id.cellsSpinner);
+        cellsSpinner.setAdapter(cellsAdapter);
+
+        ArrayAdapter<String> swarmStatusAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, swarmStatus);
+        swarmStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner swarmStatusSpinner = (Spinner)findViewById(R.id.swarmStatusSpinner);
+        cellsSpinner.setAdapter(swarmStatusAdapter);
+
+
     }
 }

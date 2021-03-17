@@ -267,7 +267,7 @@
         android:text="Cell:"
         android:layout_marginBottom="5dp"/>
     <Spinner
-        android:id="@+id/cellStatus"
+        android:id="@+id/cellsSpinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/areaHost" />
@@ -279,7 +279,7 @@
         android:text="Swarm Status:"
         android:layout_marginBottom="5dp"/>
     <Spinner
-        android:id="@+id/swarmSpinner"
+        android:id="@+id/swarmStatusSpinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/areaHost" />
