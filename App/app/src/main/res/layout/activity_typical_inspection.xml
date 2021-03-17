@@ -16,12 +16,33 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
+        android:text="Date:"
+        android:layout_marginBottom="5dp"
+        android:textSize="20dp"
+        android:textColor="#09AB4D"/>
+    <EditText
+        android:id="@+id/autoDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textAutoComplete" />
+    <EditText
+        android:id="@+id/autoTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textAutoComplete" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:text="Typical Inspection:"
         android:layout_marginBottom="5dp"
         android:textSize="20dp"
         android:textColor="#09AB4D"/>
 
-    <TextView
+    <!--<TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
@@ -31,7 +52,7 @@
         android:id="@+id/weatherSpinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/areaSpinner"/>
+        android:prompt="@string/areaSpinner"/>-->
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -275,22 +296,10 @@
         android:layout_height="wrap_content"
         android:prompt="@string/areaHost" />
 
-
-
-
     <Button
         android:id="@+id/typicalInspectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Typical inspection" />
-
-    <Button
-        android:id="@+id/pastInspectionsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check Past Inspections" />
-
-
-
+        android:text="Submit to Database" />
 
 </LinearLayout>
