@@ -297,7 +297,7 @@
         android:prompt="@string/areaHost" />
 
     <Button
-        android:id="@+id/typicalInspectionButton"
+        android:id="@+id/typicalInspectionSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit to Database" />

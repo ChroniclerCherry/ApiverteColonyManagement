@@ -1,17 +1,29 @@
 package com.example.apiverte_colony_management;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.room.Room;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.apiverte_colony_management.layout.Inspection;
+import com.example.apiverte_colony_management.layout.MyAppDatabase;
+import com.example.apiverte_colony_management.layout.Inspection;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class TypicalInspection extends AppCompatActivity {
+
+    private Button saveBtn;
 
     private  String[] population = {
             "Low", "low-medium", "medium", "medium-full", "full"
@@ -47,11 +59,14 @@ public class TypicalInspection extends AppCompatActivity {
             "yes", "no"
     };
 
+    public static MyAppDatabase myAppDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_typical_inspection);
+
+
 
         /*
         Automatically creates a current date and time
@@ -87,9 +102,35 @@ public class TypicalInspection extends AppCompatActivity {
         Spinner fitnessSpinner = (Spinner)findViewById(R.id.fitnessSpinner);
         fitnessSpinner.setAdapter(populationAdapter);
 
-        /*
+        saveBtn = findViewById(R.id.typicalInspectionSaveButton);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String population = populationSpinner.getPrompt().toString();
+                String mood = moodSpinner.getPrompt().toString();
+
+
+                Inspection inspection = new Inspection();
+                inspection.setId(1);
+                inspection.setPopulation(population);
+                inspection.setMood(mood);
+
+
+                TypicalInspection.myAppDatabase.myDao().addInspection(inspection);
+                Toast.makeText(TypicalInspection.this, "Inspection added successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        myAppDatabase = Room.databaseBuilder(getApplicationContext(),MyAppDatabase.class, "inspectiondb").allowMainThreadQueries().build();
+/*
+
+        */
+/*
         Hive Bodies
-         */
+         *//*
+
         ArrayAdapter<String> broodChambersAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodChambers);
         broodChambersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner broodChambersSpinner = (Spinner)findViewById(R.id.broodChamberSpinner);
@@ -105,25 +146,31 @@ public class TypicalInspection extends AppCompatActivity {
         Spinner ventsSpinner = (Spinner)findViewById(R.id.ventsSpinner);
         ventsSpinner.setAdapter(populationAdapter);
 
-        /*
+        */
+/*
         Frames
-         */
+         *//*
+
         ArrayAdapter<String> broadPatternAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodPattern);
         broadPatternAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner broadPatternSpinner = (Spinner)findViewById(R.id.broodPatternSpinner);
         broadPatternSpinner.setAdapter(broadPatternAdapter);
 
-        /*
+        */
+/*
         Modifications
-         */
+         *//*
+
 
         //
         // -------------------------Multi select options-----------------------------------
         //
 
-        /*
+        */
+/*
         Queen
-         */
+         *//*
+
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, status);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner statusSpinner = (Spinner)findViewById(R.id.statusSpinner);
@@ -139,6 +186,7 @@ public class TypicalInspection extends AppCompatActivity {
         Spinner swarmStatusSpinner = (Spinner)findViewById(R.id.swarmStatusSpinner);
         cellsSpinner.setAdapter(swarmStatusAdapter);
 
+*/
 
     }
 }

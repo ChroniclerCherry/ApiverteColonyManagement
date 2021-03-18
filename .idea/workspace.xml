@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e9a5a94-0307-4bb1-9d9e-7ac44e525ee9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/.idea/markdown-navigator-enh.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/.idea/markdown-navigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/TypicalInpection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-17_1_48_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-17_1_48_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/app/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/Functions.java" afterDir="false" />
-    </list>
+    <list default="true" id="6e9a5a94-0307-4bb1-9d9e-7ac44e525ee9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
