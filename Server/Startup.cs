@@ -25,11 +25,15 @@ namespace Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //connection string is defined under appsettings. Change as needed for environment
             var connectionString = Configuration.GetConnectionString("ApiverteDbContext");
             var migrationsAssembly = typeof(Context).GetTypeInfo().Assembly.GetName().Name;
 
+            //Context is the DB context, defined in the DataModels folder
+            //For most purposes, this is the only code that needs to be changed if changing to a different kind of database server
             services.AddDbContext<Context>(options =>
                 options.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
+            
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -46,6 +50,7 @@ namespace Server
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
+                //Runs migrations at runtime
                 serviceScope.ServiceProvider.GetRequiredService<Context>().Database.Migrate();
             }
 
