@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.DTOs
 {
     public class SpecialInspectionDto
     {

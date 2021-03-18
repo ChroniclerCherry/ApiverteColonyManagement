@@ -3,12 +3,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Server.Commands.AddLookups;
-using Server.Commands.EditLookups;
 using Server.CQS.Commands;
 using Server.CQS.DTOs;
 using Server.CQS.Queries;
-using Server.Queries.GetLookups;
 
 namespace Server.Controllers
 {
@@ -47,7 +44,7 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("AddHost")]
-        public async Task<IActionResult> AddHost(Guid id, string name, bool isActive)
+        public async Task<IActionResult> AddHost(Guid id, string name, bool isActive = true)
         {
             var result = await Mediator.Send(new AddHostCommand()
             {
@@ -66,7 +63,7 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditHost")]
-        public async Task<IActionResult> EditHost(Guid id, string name, bool isActive)
+        public async Task<IActionResult> EditHost(Guid id, string name, bool isActive = true)
         {
             var result = await Mediator.Send(new EditHostCommand()
             {
@@ -80,7 +77,7 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("AddArea")]
-        public async Task<IActionResult> AddArea(Guid id, string name, bool isActive)
+        public async Task<IActionResult> AddArea(Guid id, string name, bool isActive = true)
         {
             var result = await Mediator.Send(new AddAreaCommand()
             {
@@ -99,7 +96,7 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditArea")]
-        public async Task<IActionResult> EditArea(Guid id,string name, bool isActive)
+        public async Task<IActionResult> EditArea(Guid id,string name, bool isActive = true)
         {
             var result = await Mediator.Send(new EditAreaCommand()
             {

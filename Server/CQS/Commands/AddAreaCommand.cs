@@ -5,13 +5,13 @@ using MediatR;
 using Server.DataModels;
 using Server.DataModels.Colony;
 
-namespace Server.Commands.AddLookups
+namespace Server.CQS.Commands
 {
     public class AddAreaCommand : IRequest<Guid>
     {
         public Guid Id;
         public string Name { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
 
         public class AddAreaCommandHandler : IRequestHandler<AddAreaCommand, Guid>
         {

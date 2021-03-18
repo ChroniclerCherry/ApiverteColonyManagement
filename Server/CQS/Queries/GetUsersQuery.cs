@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.Queries.DTOs;
 
 namespace Server.CQS.Queries
 {
@@ -22,11 +22,15 @@ namespace Server.CQS.Queries
             }
             public async Task<IEnumerable<LookupDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
             {
-                return await _db.User.Select(a => new LookupDto()
+                return await _db.User.Select(u => new LookupDto()
                 {
-                    Id = a.Id,
-                    Name = a.Name,
-                    IsActive = a.IsActive
+                    Id = u.Id,
+                    Name = u.Name,
+                    IsActive = u.IsActive,
+                    CreatedBy = u.CreatedBy,
+                    CreatedDate = u.CreatedDate,
+                    LastModifiedBy = u.LastModifiedBy,
+                    LastModifiedDate = u.LastModifiedDate,
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.CQS.Commands;
+using Server.CQS.DTOs;
 using Server.DataModels;
 
 namespace Server.CQS.Queries
@@ -22,18 +23,22 @@ namespace Server.CQS.Queries
             }
             public async Task<IEnumerable<SpecialInspectionDto>> Handle(GetSpecialInspectionsQuery request, CancellationToken cancellationToken)
             {
-                return await _db.SpecialInspection.Select(a => new SpecialInspectionDto()
+                return await _db.SpecialInspection.Select(i => new SpecialInspectionDto()
                 {
-                    Id = a.Id,
-                    IsActive = a.IsActive,
-                    UserId = a.UserID,
-                    ColonyId = a.ColonyId,
-                    Harvest = a.Harvest,
-                    Feeds = a.Feeds,
-                    Treatments = a.Treatments,
-                    TreatmentDetails = a.TreatmentDetails,
-                    Wintering = a.Wintering,
-                    Growth = a.Growth
+                    Id = i.Id,
+                    CreatedBy = i.CreatedBy,
+                    CreatedDate = i.CreatedDate,
+                    LastModifiedBy = i.LastModifiedBy,
+                    LastModifiedDate = i.LastModifiedDate,
+                    IsActive = i.IsActive,
+                    UserId = i.UserID,
+                    ColonyId = i.ColonyId,
+                    Harvest = i.Harvest,
+                    Feeds = i.Feeds,
+                    Treatments = i.Treatments,
+                    TreatmentDetails = i.TreatmentDetails,
+                    Wintering = i.Wintering,
+                    Growth = i.Growth
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

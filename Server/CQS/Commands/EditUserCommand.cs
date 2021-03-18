@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Server.Commands.EditLookups;
 using Server.DataModels;
 
 namespace Server.CQS.Commands
@@ -14,7 +13,7 @@ namespace Server.CQS.Commands
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
 
         public class EditUserCommandHandler : IRequestHandler<EditUserCommand, Guid>
         {

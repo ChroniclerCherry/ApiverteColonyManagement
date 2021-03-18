@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.CQS.Commands;
+using Server.CQS.DTOs;
 using Server.DataModels;
 
 namespace Server.CQS.Queries
@@ -22,33 +23,36 @@ namespace Server.CQS.Queries
             }
             public async Task<IEnumerable<TypicalInspectionDto>> Handle(GetTypicalInspectionQuery request, CancellationToken cancellationToken)
             {
-                return await _db.TypicalInspection.Select(a => new TypicalInspectionDto()
+                return await _db.TypicalInspection.Select(i => new TypicalInspectionDto()
                 {
-                    Id = a.Id,
-                    IsActive = a.IsActive,
-                    UserId = a.UserID,
-                    ColonyId = a.ColonyId,
-                    Weather = a.Weather,
-                    Population = a.Population,
-                    Mood = a.Mood,
-                    Fitness = a.Fitness,
-                    BroodChambers = a.BroodChambers,
-                    HoneyChamber = a.HoneyChamber,
-                    MouseGuard = a.MouseGuard,
-                    WaspGuard = a.WaspGuard,
-                    PollenCollector = a.PollenCollector,
-                    HiveBottom = a.HiveBottom,
-                    Vents = a.Vents,
-                    Brood = a.Brood,
-                    Honey = a.Honey,
-                    BroodPattern = a.BroodPattern,
-                    Issues = a.Issues,
-                    Growth = a.Growth,
-                    Seasonal = a.Seasonal,
-                    Status = a.Status,
-                    Cells = a.Cells,
-                    SwarmStatus = a.SwarmStatus,
-                    Excluder = a.Excluder
+                    Id = i.Id,
+                    CreatedBy = i.CreatedBy,
+                    CreatedDate = i.CreatedDate,
+                    LastModifiedBy = i.LastModifiedBy,
+                    LastModifiedDate = i.LastModifiedDate,
+                    UserId = i.UserID,
+                    ColonyId = i.ColonyId,
+                    Weather = i.Weather,
+                    Population = i.Population,
+                    Mood = i.Mood,
+                    Fitness = i.Fitness,
+                    BroodChambers = i.BroodChambers,
+                    HoneyChamber = i.HoneyChamber,
+                    MouseGuard = i.MouseGuard,
+                    WaspGuard = i.WaspGuard,
+                    PollenCollector = i.PollenCollector,
+                    HiveBottom = i.HiveBottom,
+                    Vents = i.Vents,
+                    Brood = i.Brood,
+                    Honey = i.Honey,
+                    BroodPattern = i.BroodPattern,
+                    Issues = i.Issues,
+                    Growth = i.Growth,
+                    Seasonal = i.Seasonal,
+                    Status = i.Status,
+                    Cells = i.Cells,
+                    SwarmStatus = i.SwarmStatus,
+                    Excluder = i.Excluder
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

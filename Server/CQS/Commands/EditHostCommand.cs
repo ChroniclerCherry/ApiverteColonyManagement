@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.DataModels;
 
-namespace Server.Commands.EditLookups
+namespace Server.CQS.Commands
 {
     public class EditHostCommand : IRequest<Guid>
     {

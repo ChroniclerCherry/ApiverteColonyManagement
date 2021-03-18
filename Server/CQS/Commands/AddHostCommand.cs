@@ -12,7 +12,7 @@ namespace Server.CQS.Commands
         public Guid Id;
         public string Name { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
 
         public class AddHostCommandHandler : IRequestHandler<AddHostCommand, Guid>
         {

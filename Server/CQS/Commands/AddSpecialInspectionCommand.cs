@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Server.CQS.DTOs;
 using Server.DataModels;
 
 namespace Server.CQS.Commands
