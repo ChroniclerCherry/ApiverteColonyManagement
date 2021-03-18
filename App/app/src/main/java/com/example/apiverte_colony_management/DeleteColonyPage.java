@@ -34,7 +34,7 @@ public class DeleteColonyPage extends AppCompatActivity {
             Intent refresh = getIntent();
             finish();
             startActivity(refresh);
-            Toast.makeText(this, R.string.editColonyPageSubmitMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.deleteColonyPageSubmitMessage, Toast.LENGTH_SHORT).show();
         });
 
         Button returnButton = findViewById(R.id.deleteColonyReturnButton);
