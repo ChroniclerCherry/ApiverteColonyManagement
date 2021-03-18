@@ -109,8 +109,8 @@ public class TypicalInspection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String population = populationSpinner.getPrompt().toString();
-                String mood = moodSpinner.getPrompt().toString();
+                String population = populationSpinner.getSelectedItem().toString();
+                String mood = moodSpinner.getSelectedItem().toString();
 
 
 
