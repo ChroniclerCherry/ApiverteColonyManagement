@@ -1,17 +1,17 @@
 package com.example.apiverte_colony_management;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateColonyPage extends Activity {
+public class CreateColonyPage extends AppCompatActivity {
 
     //Declare needed lists/variables
     ArrayList<String> areaList = new ArrayList<>();
@@ -150,8 +150,7 @@ public class CreateColonyPage extends Activity {
 
         Button returnButton = findViewById(R.id.createColonyReturnButton);
         returnButton.setOnClickListener(v -> {
-            Intent returnToMenu = new Intent(this, Functions.class);
-            startActivity(returnToMenu);
+            finish();
         });
     }
 }

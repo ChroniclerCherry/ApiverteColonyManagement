@@ -24,6 +24,14 @@
         <activity
             android:name=".CreateColonyPage"
             android:label="Create Colony" />
+        <activity
+            android:name=".ColonyManagementPage"
+            android:label="Colony Management" />
+        <activity
+            android:name=".EditColonyPage"
+            android:label="Edit Colony" />
+        <activity android:name=".DeleteColonyPage"
+            android:label="Delete Colony" />
     </application>
 
 </manifest>

@@ -1,29 +1,45 @@
 <resources>
+
+    ---Colony Management Strings - Dan ---
     <string name="app_name">Apiverte-Colony-Management</string>
     <string name="createColonyPageHeader">Add New Colony</string>
-    <string name="createColonyPageInputHint">Enter data here</string>
-    <string name="createColonyPageLocationHeader">Location Data</string>
-    <string name="createColonyPageRowArea">Area</string>
-    <string name="createColonyPageRowHost">Host</string>
-    <string name="createColonyPageRowHiveNum">Hive Number</string>
-    <string name="createColonyPageRowColonyNum">Colony Number</string>
-    <string name="createColonyPageCharacteristicsHeader">Colony Characteristics</string>
-    <string name="createColonyPageRowColonySource">Colony Source</string>
-    <string name="createColonyPageRowQueen">Queen</string>
-    <string name="createColonyPageRowGenetics">Colony Genetics</string>
-    <string name="createColonyPageRowInstallation">Installation Type</string>
-    <string name="createColonyPageRowAddInfo">Additional Info</string>
-    <string name="createColonyPageSetupHeader">Colony Setup</string>
-    <string name="createColonyPageRowInstallDate">Installation Date</string>
-    <string name="createColonyPageRowInstallDateButton">Select Date</string>
-    <string name="createColonyPageRowHiveType">Hive Type</string>
-    <string name="createColonyPageRowBroodChamber">Brood Chamber</string>
-    <string name="createColonyPageRowQueenExcluder">Queen Excluder</string>
-    <string name="createColonyPageRowAddPhoto">Add Photo</string>
-    <string name="createColonyPagePhotoDescription">Current Colony Photo</string>
-    <string name="createColonyPageSubmitButton">Add Colony</string>
-    <string name="createColonyPageReturnButton">Return to Menu</string>
+    <string name="editColonyPageHeader">Edit Colony Data</string>
+    <string name="deleteColonyPageHeader">Delete a Colony</string>
+    <string name="colonyPagesInputHint">Enter data here</string>
+    <string name="colonyPagesLocationHeader">Location Data</string>
+    <string name="colonyPagesRowArea">Area</string>
+    <string name="colonyPagesRowHost">Host</string>
+    <string name="colonyPagesRowHiveNum">Hive Number</string>
+    <string name="colonyPagesRowColonyNum">Colony Number</string>
+    <string name="colonyPagesCharacteristicsHeader">Colony Characteristics</string>
+    <string name="colonyPagesRowColonySource">Colony Source</string>
+    <string name="colonyPagesRowQueen">Queen</string>
+    <string name="colonyPagesRowGenetics">Colony Genetics</string>
+    <string name="colonyPagesRowInstallation">Installation Type</string>
+    <string name="colonyPagesRowAddInfo">Additional Info</string>
+    <string name="colonyPagesSetupHeader">Colony Setup</string>
+    <string name="colonyPagesRowInstallDate">Installation Date</string>
+    <string name="colonyPagesRowInstallDateButton">Select Date</string>
+    <string name="colonyPagesRowHiveType">Hive Type</string>
+    <string name="colonyPagesRowBroodChamber">Brood Chamber</string>
+    <string name="colonyPagesRowQueenExcluder">Queen Excluder</string>
+    <string name="colonyPagesRowAddPhoto">Add Photo</string>
+    <string name="colonyPagesPhotoDescription">Current Colony Photo</string>
+    <string name="colonyPagesSubmitButton">Submit</string>
+    <string name="colonyPagesReturnButton">Return to Menu</string>
     <string name="createColonyPageSubmitMessage">Colony Created!</string>
+    <string name="editColonyPageSubmitMessage">Colony Edited!</string>
+    <string name="deleteColonyPageSubmitMessage">Colony Deleted!</string>
+    <string name="colonyManagementCreateButton">Add a New Colony</string>
+    <string name="colonyManagementEditButton">Edit an Existing Colony</string>
+    <string name="colonyManagementDeleteButton">Delete a Colony</string>
+    <string name="deleteInfoHeader">Selected Colony Information</string>
+    <string name="colonyPagesSelectedColony">Select Colony:</string>
+    <string name="deleteCreatedBy">Created by: </string>
+    <string name="deleteCreatedDate">Created on: </string>
+    <string name="deleteAreaName">Area Name: </string>
+    <string name="deletedHostName">Host Name: </string>
+    -------------
 
     ---Cynthia---
     <string name="logo">APIVERTE</string>
