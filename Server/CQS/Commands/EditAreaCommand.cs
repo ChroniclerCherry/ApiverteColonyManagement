@@ -5,12 +5,13 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.DataModels;
 
-namespace Server.Commands.EditLookups
+namespace Server.CQS.Commands
 {
     public class EditAreaCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public class EditAreaCommandHandler : IRequestHandler<EditAreaCommand, Guid>
         {
@@ -22,10 +23,11 @@ namespace Server.Commands.EditLookups
             }
             public async Task<Guid> Handle(EditAreaCommand request, CancellationToken cancellationToken)
             {
-                var area = await _db.Area.FirstOrDefaultAsync(a => a.Id == request.Id);
+                var area = await _db.Area.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken: cancellationToken);
                 if (area == null) return Guid.Empty;
 
                 area.Name = request.Name;
+                area.IsActive = request.IsActive;
                 _db.SaveChanges();
 
                 return area.Id;

@@ -5,11 +5,14 @@ using MediatR;
 using Server.DataModels;
 using Server.DataModels.Colony;
 
-namespace Server.Commands.AddLookups
+namespace Server.CQS.Commands
 {
     public class AddHostCommand : IRequest<Guid>
     {
+        public Guid Id;
         public string Name { get; set; }
+
+        public bool IsActive { get; set; } = true;
 
         public class AddHostCommandHandler : IRequestHandler<AddHostCommand, Guid>
         {
@@ -23,7 +26,9 @@ namespace Server.Commands.AddLookups
             {
                 var host = new Host()
                 {
-                    Name = request.Name
+                    Id = request.Id,
+                    Name = request.Name,
+                    IsActive = request.IsActive
                 };
                 await _db.Host.AddAsync(host, cancellationToken);
                 _db.SaveChanges();

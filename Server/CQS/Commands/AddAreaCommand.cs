@@ -9,13 +9,15 @@ namespace Server.Commands.AddLookups
 {
     public class AddAreaCommand : IRequest<Guid>
     {
+        public Guid Id;
         public string Name { get; set; }
+        public bool IsActive { get; set; } = true;
 
-        public class UpdateProductCommandHandler : IRequestHandler<AddAreaCommand, Guid>
+        public class AddAreaCommandHandler : IRequestHandler<AddAreaCommand, Guid>
         {
             private readonly Context _db;
 
-            public UpdateProductCommandHandler(Context db)
+            public AddAreaCommandHandler(Context db)
             {
                 _db = db;
             }
@@ -23,7 +25,9 @@ namespace Server.Commands.AddLookups
             {
                 var area = new Area()
                 {
-                    Name = request.Name
+                    Id = request.Id,
+                    Name = request.Name,
+                    IsActive = request.IsActive
                 };
                 await _db.Area.AddAsync(area, cancellationToken);
                 _db.SaveChanges();

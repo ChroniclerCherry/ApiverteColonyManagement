@@ -47,11 +47,13 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("AddHost")]
-        public async Task<IActionResult> AddHost(string name)
+        public async Task<IActionResult> AddHost(Guid id, string name, bool isActive)
         {
             var result = await Mediator.Send(new AddHostCommand()
             {
-                Name = name
+                Id = id,
+                Name = name,
+                IsActive = isActive
             });
             return Ok(result);
         }
@@ -64,12 +66,13 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditHost")]
-        public async Task<IActionResult> EditHost(Guid id, string name)
+        public async Task<IActionResult> EditHost(Guid id, string name, bool isActive)
         {
             var result = await Mediator.Send(new EditHostCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
 
             if (result == Guid.Empty) return NotFound();
@@ -77,11 +80,13 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("AddArea")]
-        public async Task<IActionResult> AddArea(string name)
+        public async Task<IActionResult> AddArea(Guid id, string name, bool isActive)
         {
             var result = await Mediator.Send(new AddAreaCommand()
             {
-                Name = name
+                Id = id,
+                Name = name,
+                IsActive = isActive
             });
             return Ok(result);
         }
@@ -94,12 +99,13 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditArea")]
-        public async Task<IActionResult> EditArea(Guid id,string name)
+        public async Task<IActionResult> EditArea(Guid id,string name, bool isActive)
         {
             var result = await Mediator.Send(new EditAreaCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
 
             if (result == Guid.Empty) return NotFound();

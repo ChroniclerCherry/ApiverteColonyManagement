@@ -15,23 +15,25 @@ namespace Server.Controllers
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [HttpPost, Route("AddUser")]
-        public async Task<IActionResult> AddUser(Guid id, string name)
+        public async Task<IActionResult> AddUser(Guid id, string name, bool isActive)
         {
             var result = await Mediator.Send(new AddUserCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
             return Ok(result);
         }
 
         [HttpPost, Route("EditUser")]
-        public async Task<IActionResult> EditUser(Guid id, string name)
+        public async Task<IActionResult> EditUser(Guid id, string name, bool isActive)
         {
             var result = await Mediator.Send(new EditUserCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
             if (result == Guid.Empty) return NotFound();
             return Ok(result);

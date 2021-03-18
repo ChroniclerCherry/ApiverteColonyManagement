@@ -12,6 +12,8 @@ namespace Server.Commands.EditLookups
         public Guid Id { get; set; }
         public string Name { get; set; }
 
+        public bool IsActive { get; set; }
+
         public class EditHostCommandHandler : IRequestHandler<EditHostCommand, Guid>
         {
             private readonly Context _db;
@@ -22,10 +24,11 @@ namespace Server.Commands.EditLookups
             }
             public async Task<Guid> Handle(EditHostCommand request, CancellationToken cancellationToken)
             {
-                var area = await _db.Host.FirstOrDefaultAsync(a => a.Id == request.Id);
+                var area = await _db.Host.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken: cancellationToken);
                 if (area == null) return Guid.Empty;
 
                 area.Name = request.Name;
+                area.IsActive = request.IsActive;
                 _db.SaveChanges();
 
                 return area.Id;
