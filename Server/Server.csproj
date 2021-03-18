@@ -17,4 +17,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Filesystem\Colonies\" />
+    <Folder Include="Filesystem\SpecialInspections\" />
+    <Folder Include="Filesystem\TypicalInspections\" />
+  </ItemGroup>
+
 </Project>

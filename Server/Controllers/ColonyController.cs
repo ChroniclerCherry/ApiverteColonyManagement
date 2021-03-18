@@ -13,7 +13,7 @@ using Server.Queries.GetLookups;
 namespace Server.Controllers
 {
     [Route("[controller]")]
-    public class ColonyController : ControllerBase
+    public class ColonyController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private IMediator _mediator;
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
@@ -39,7 +39,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetColonies")]
+        [HttpGet, Route("GetColonies")]
         public async Task<IActionResult> GetColonies()
         {
             var result = await Mediator.Send(new GetColoniesQuery());
@@ -56,7 +56,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetHosts")]
+        [HttpGet, Route("GetHosts")]
         public async Task<IActionResult> GetHosts()
         {
             var result = await Mediator.Send(new GetHostsQuery());
@@ -86,7 +86,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetAreas")]
+        [HttpGet, Route("GetAreas")]
         public async Task<IActionResult> GetAreas()
         {
             var result = await Mediator.Send(new GetAreasQuery());
@@ -105,6 +105,8 @@ namespace Server.Controllers
             if (result == Guid.Empty) return NotFound();
             return Ok(result);
         }
+
+
 
     }
 }
