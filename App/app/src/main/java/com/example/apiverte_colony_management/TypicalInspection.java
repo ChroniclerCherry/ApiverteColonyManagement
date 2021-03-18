@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class TypicalInspection extends AppCompatActivity {
 
-    private Button saveBtn;
+    private Button saveBtn, readBtn;
 
     private  String[] population = {
             "Low", "low-medium", "medium", "medium-full", "full"
@@ -104,6 +104,7 @@ public class TypicalInspection extends AppCompatActivity {
 
         saveBtn = findViewById(R.id.typicalInspectionSaveButton);
 
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,8 +113,8 @@ public class TypicalInspection extends AppCompatActivity {
                 String mood = moodSpinner.getPrompt().toString();
 
 
+
                 Inspection inspection = new Inspection();
-                inspection.setId(1);
                 inspection.setPopulation(population);
                 inspection.setMood(mood);
 

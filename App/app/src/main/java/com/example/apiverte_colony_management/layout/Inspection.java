@@ -3,11 +3,11 @@ package com.example.apiverte_colony_management.layout;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Typical Inspections")
+@Entity(tableName = "inspections")
 public class Inspection {
 
-    @PrimaryKey
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    private int id = 0;
 
     private String population;
     private String mood;

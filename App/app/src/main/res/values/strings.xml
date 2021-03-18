@@ -130,6 +130,8 @@
     <string name="areaHost">Host</string>
     <string name="spinnerHiveNumber">Hive Number</string>
     <string name="spinnerColonyNumber">Colonu Number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     -------------
 
 

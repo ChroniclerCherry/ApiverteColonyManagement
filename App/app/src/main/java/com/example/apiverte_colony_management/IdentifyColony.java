@@ -85,6 +85,12 @@ public class IdentifyColony extends AppCompatActivity {
                 startActivity(goToTypicalInspection);
         });
 
+        Intent goToSavedInspections = new Intent(IdentifyColony.this, ReadInspections.class);
+
+        pastInspectionsButton.setOnClickListener(e -> {
+            startActivity(goToSavedInspections);
+        });
+
 
 
 
