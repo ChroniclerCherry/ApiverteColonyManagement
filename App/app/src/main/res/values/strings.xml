@@ -24,6 +24,7 @@
     <string name="createColonyPageSubmitButton">Add Colony</string>
     <string name="createColonyPageReturnButton">Return to Menu</string>
     <string name="createColonyPageSubmitMessage">Colony Created!</string>
+    <string name="UpdateButton">Update with server</string>
 
     ---Cynthia---
     <string name="logo">APIVERTE</string>
