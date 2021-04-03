@@ -4,17 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.apiverte_colony_management.DTOs.GeneralDTO;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,9 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateWithServer extends AppCompatActivity {
 
@@ -80,6 +81,26 @@ public class UpdateWithServer extends AppCompatActivity {
         }
 
         private void SyncUsers() throws IOException {
+            List<GeneralDTO> Server_Users = GetUsersFromServer();
+            List<GeneralDTO> Local_Users = GetUsersFromLocal();
+            //TODO: compare users from local db and server and only keep the newest versions of each
+
+            SaveUsersToLocal();
+            SaveUsersToServer();
+
+
+        }
+
+        private List<GeneralDTO> GetUsersFromLocal() {
+            //TODO: get users from local database
+            return null;
+        }
+
+        private void SaveUsersToLocal() {
+            //TODO; save updated users to server
+        }
+
+        private List<GeneralDTO> GetUsersFromServer() throws IOException {
             URL get_users_url = new URL(server_url + "User/GetUsers");
             HttpURLConnection get_users_con = (HttpURLConnection) get_users_url.openConnection();
             InputStream response = get_users_con.getInputStream();
@@ -97,31 +118,67 @@ public class UpdateWithServer extends AppCompatActivity {
             }
 
             String result = sb.toString();
+            List<GeneralDTO> Users = new ArrayList<>();
+            try {
+                JSONArray users_json = new JSONArray (result);
+                for (int i = 0; i < users_json.length(); i++){
+                    JSONObject user = users_json.getJSONObject(i);
+                    GeneralDTO userDTO = new Gson().fromJson(user.toString(),GeneralDTO.class);
+                    Users.add(userDTO);
+                }
+
+            } catch (JSONException ex) {
+                Log.e("Error", ex.getMessage());
+            }
 
             get_users_con.disconnect();
+            return Users;
+        }
 
-            URL add_users_url = new URL(server_url + "User/GetUsers");
-            URL edit_users_url = new URL(server_url + "User/GetUsers");
+        private void SaveUsersToServer() throws IOException{
+            //TODO: save updated users to local db
+            URL get_users_url = new URL(server_url + "User/SaveUsers");
         }
 
         private void SyncAreas(){
-
+            //TODO: get areas from server
+            //TODO: get areas from local database
+            //TODO: compare areas from local db and server and only keep the newest versions of each
+            //TODO: save updated areas to local db
+            //TODO; save updated areas to server
         }
 
         private void SyncColony(){
-
+            //TODO: get colonies from server
+            //TODO: get colonies from local database
+            //TODO: compare colonies from local db and server and only keep the newest versions of each
+            //TODO: save updated colonies to local db
+            //TODO; save updated colonies to server
         }
 
         private void SyncHost(){
-
+            //TODO: get colonies from server
+            //TODO: get colonies from local database
+            //TODO: compare colonies from local db and server and only keep the newest versions of each
+            //TODO: save updated colonies to local db
+            //TODO; save updated colonies to server
         }
 
         private void SyncTypicalInspection(){
+            //TODO: get colonies from server
+            //TODO: get colonies from local database
+            //TODO: compare colonies from local db and server and only keep the newest versions of each
+            //TODO: save updated colonies to local db
+            //TODO; save updated colonies to server
 
         }
 
         private void SyncSpecialInspection(){
-
+            //TODO: get colonies from server
+            //TODO: get colonies from local database
+            //TODO: compare colonies from local db and server and only keep the newest versions of each
+            //TODO: save updated colonies to local db
+            //TODO; save updated colonies to server
         }
 
         @Override

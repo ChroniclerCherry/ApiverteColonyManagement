@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Server.CQS.Commands;
+using Server.CQS.DTOs;
 using Server.CQS.Queries;
 
 namespace Server.Controllers
@@ -15,25 +17,25 @@ namespace Server.Controllers
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [HttpPost, Route("AddUser")]
-        public async Task<IActionResult> AddUser(Guid id, string name, bool isActive)
+        public async Task<IActionResult> AddUser(LookupDto user)
         {
             var result = await Mediator.Send(new AddUserCommand()
             {
-                Id = id,
-                Name = name,
-                IsActive = isActive
+                Id = user.Id,
+                Name = user.Name,
+                IsActive = user.IsActive,
             });
             return Ok(result);
         }
 
         [HttpPost, Route("EditUser")]
-        public async Task<IActionResult> EditUser(Guid id, string name, bool isActive)
+        public async Task<IActionResult> EditUser(LookupDto user)
         {
             var result = await Mediator.Send(new EditUserCommand()
             {
-                Id = id,
-                Name = name,
-                IsActive = isActive
+                Id = user.Id,
+                Name = user.Name,
+                IsActive = user.IsActive
             });
             if (result == Guid.Empty) return NotFound();
             return Ok(result);

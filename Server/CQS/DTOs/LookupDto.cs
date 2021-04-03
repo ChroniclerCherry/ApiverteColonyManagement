@@ -11,9 +11,9 @@ namespace Server.CQS.DTOs
         public bool IsActive { get; set; }
 
         public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public long LastModifiedDate { get; set; }
 
     }
 }

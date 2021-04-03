@@ -7,9 +7,9 @@ namespace Server.CQS.DTOs
         public Guid Id { get; set; }
         public bool IsActive { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public long LastModifiedDate { get; set; }
 
         public Guid HostId { get; set; }
 
@@ -29,7 +29,7 @@ namespace Server.CQS.DTOs
 
         public string AdditionalInfo { get; set; }
 
-        public DateTime InstallDate { get; set; }
+        public long InstallDate { get; set; }
 
         public string HiveType { get; set; }
         public string BroodChamberType { get; set; }

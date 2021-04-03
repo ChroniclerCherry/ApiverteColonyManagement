@@ -14,6 +14,8 @@ namespace Server.CQS.Commands
         public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public string LastModifiedBy { get; set; }
+        public long LastModifiedDate { get; set; }
 
         public class EditUserCommandHandler : IRequestHandler<EditUserCommand, Guid>
         {
@@ -30,6 +32,9 @@ namespace Server.CQS.Commands
 
                 user.Name = request.Name;
                 user.IsActive = request.IsActive;
+                user.LastModifiedDate = request.LastModifiedDate;
+                user.LastModifiedBy = request.LastModifiedBy;
+
                 _db.SaveChanges();
 
                 return user.Id;
