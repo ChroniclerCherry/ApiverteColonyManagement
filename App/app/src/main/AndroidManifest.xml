@@ -24,6 +24,7 @@
         <activity
             android:name=".CreateColonyPage"
             android:label="Create Colony" />
+        <activity  android:name=".UpdateWithServer"/>
     </application>
 
 </manifest>

@@ -20,5 +20,13 @@ public class Functions extends AppCompatActivity {
             Intent goToAddNewColony = new Intent(Functions.this, CreateColonyPage.class);
             startActivity(goToAddNewColony);
         } });
+
+        Button update = findViewById(R.id.update);
+        update.setOnClickListener( new View.OnClickListener()
+        {   public void onClick(View v) {
+            Intent goToUpdate = new Intent(Functions.this, UpdateWithServer.class);
+            startActivity(goToUpdate);
+        } });
+
     }
 }
