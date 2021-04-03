@@ -12,9 +12,9 @@ public class SpecialInspectionDTO {
 
     public String CreatedBy;
 
-    public LocalDateTime CreatedDate;
+    public long CreatedDate;
     public String LastModifiedBy;
-    public LocalDateTime LastModifiedDate;
+    public long LastModifiedDate;
 
     public UUID UserId;
     public UUID ColonyId;

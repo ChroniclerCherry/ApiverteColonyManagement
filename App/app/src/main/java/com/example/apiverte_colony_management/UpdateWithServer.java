@@ -23,9 +23,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UpdateWithServer extends AppCompatActivity {
@@ -58,7 +60,6 @@ public class UpdateWithServer extends AppCompatActivity {
             }
         });
 
-
     }
 
     class ServerUpdate extends AsyncTask< String, Integer, String> {
@@ -83,11 +84,30 @@ public class UpdateWithServer extends AppCompatActivity {
         private void SyncUsers() throws IOException {
             List<GeneralDTO> Server_Users = GetUsersFromServer();
             List<GeneralDTO> Local_Users = GetUsersFromLocal();
-            //TODO: compare users from local db and server and only keep the newest versions of each
 
-            SaveUsersToLocal();
-            SaveUsersToServer();
+            for (GeneralDTO ServerUser : Server_Users){
+                GeneralDTO local = null;
+                //grab local user with same ID as current server user
+                for (GeneralDTO l : Local_Users) {
+                    if (l.Id == ServerUser.Id) {
+                        local = l;
+                        break;
+                    }
+                }
+                if (local == null){
+                    //if the server user doesn't exist locally, add it
+                    Local_Users.add(ServerUser);
+                } else {
+                    //if the server version of the object is more recent, replace it with the server data
+                    if (local.LastModifiedDate < ServerUser.LastModifiedDate){
+                        Local_Users.remove(local);
+                        Local_Users.add(ServerUser);
+                    }
+                }
+            }
 
+            SaveUsersToLocal(Local_Users);
+            SaveUsersToServer(Local_Users);
 
         }
 
@@ -96,8 +116,32 @@ public class UpdateWithServer extends AppCompatActivity {
             return null;
         }
 
-        private void SaveUsersToLocal() {
-            //TODO; save updated users to server
+        private void SaveUsersToLocal(List<GeneralDTO> local_Users) throws IOException {
+
+            for (GeneralDTO user : local_Users){
+                URL edit_user_url = new URL(server_url + "User/EditUser");
+                HttpURLConnection get_users_con = (HttpURLConnection) edit_user_url.openConnection();
+                get_users_con.setRequestMethod("POST");
+                get_users_con.setRequestProperty("Content-Type", "application/json; utf-8");
+                get_users_con.setRequestProperty("Accept", "application/json");
+                get_users_con.setDoOutput(true);
+                Gson gson = new Gson();
+                String user_json = gson.toJson(user);
+                try(OutputStream os = get_users_con.getOutputStream()) {
+                    byte[] input = user_json.getBytes("utf-8");
+                    os.write(input, 0, input.length);
+
+                    try(BufferedReader br = new BufferedReader(
+                            new InputStreamReader(get_users_con.getInputStream(), "utf-8"))) {
+                        StringBuilder response = new StringBuilder();
+                        String responseLine = null;
+                        while ((responseLine = br.readLine()) != null) {
+                            response.append(responseLine.trim());
+                        }
+                        System.out.println(response.toString());
+                    }
+                }
+            }
         }
 
         private List<GeneralDTO> GetUsersFromServer() throws IOException {
@@ -135,50 +179,25 @@ public class UpdateWithServer extends AppCompatActivity {
             return Users;
         }
 
-        private void SaveUsersToServer() throws IOException{
+        private void SaveUsersToServer(List<GeneralDTO> local_Users) throws IOException{
             //TODO: save updated users to local db
             URL get_users_url = new URL(server_url + "User/SaveUsers");
         }
 
         private void SyncAreas(){
-            //TODO: get areas from server
-            //TODO: get areas from local database
-            //TODO: compare areas from local db and server and only keep the newest versions of each
-            //TODO: save updated areas to local db
-            //TODO; save updated areas to server
         }
 
         private void SyncColony(){
-            //TODO: get colonies from server
-            //TODO: get colonies from local database
-            //TODO: compare colonies from local db and server and only keep the newest versions of each
-            //TODO: save updated colonies to local db
-            //TODO; save updated colonies to server
         }
 
         private void SyncHost(){
-            //TODO: get colonies from server
-            //TODO: get colonies from local database
-            //TODO: compare colonies from local db and server and only keep the newest versions of each
-            //TODO: save updated colonies to local db
-            //TODO; save updated colonies to server
         }
 
         private void SyncTypicalInspection(){
-            //TODO: get colonies from server
-            //TODO: get colonies from local database
-            //TODO: compare colonies from local db and server and only keep the newest versions of each
-            //TODO: save updated colonies to local db
-            //TODO; save updated colonies to server
 
         }
 
         private void SyncSpecialInspection(){
-            //TODO: get colonies from server
-            //TODO: get colonies from local database
-            //TODO: compare colonies from local db and server and only keep the newest versions of each
-            //TODO: save updated colonies to local db
-            //TODO; save updated colonies to server
         }
 
         @Override

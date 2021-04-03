@@ -12,9 +12,9 @@ public class ColonyDTO {
 
     public String CreatedBy;
 
-    public LocalDateTime CreatedDate;
+    public long CreatedDate;
     public String LastModifiedBy;
-    public LocalDateTime LastModifiedDate;
+    public long LastModifiedDate;
 
     public UUID HostId;
 
@@ -34,7 +34,7 @@ public class ColonyDTO {
 
     public String AdditionalInfo;
 
-    public LocalDateTime InstallDate;
+    public long InstallDate;
 
     public String HiveType;
     public String BroodChamberType;
