@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Server.CQS.Commands;
+using Server.CQS.Commands.SpecialInspection;
+using Server.CQS.Commands.TypicalInspection;
 using Server.CQS.DTOs;
 using Server.CQS.Queries;
 

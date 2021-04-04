@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Server.CQS.Commands;
+using Server.CQS.Commands.User;
 using Server.CQS.DTOs;
 using Server.CQS.Queries;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +6,7 @@ using MediatR;
 using Server.CQS.DTOs;
 using Server.DataModels;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.User
 {
     public class SyncUsersCommand : IRequest<IEnumerable<LookupDto>>
     {
@@ -23,12 +22,11 @@ namespace Server.CQS.Commands
             }
             public Task<IEnumerable<LookupDto>> Handle(SyncUsersCommand request, CancellationToken cancellationToken)
             {
-                var users = request.Users;
-                if (users == null) users = new List<LookupDto>();
+                var users = request.Users ?? new List<LookupDto>();
                 foreach (var appUser in users)
                 {
                     var localUser = _db.User.FirstOrDefault(u => u.Id == appUser.Id);
-                    User user = new User()
+                    DataModels.User user = new DataModels.User()
                     {
                         Id = appUser.Id,
                         Name = appUser.Name,

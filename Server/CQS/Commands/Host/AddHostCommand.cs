@@ -3,35 +3,35 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Server.DataModels;
-using Server.DataModels.Colony;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.Host
 {
-    public class AddAreaCommand : IRequest<Guid>
+    public class AddHostCommand : IRequest<Guid>
     {
         public Guid Id;
         public string Name { get; set; }
+
         public bool IsActive { get; set; }
 
-        public class AddAreaCommandHandler : IRequestHandler<AddAreaCommand, Guid>
+        public class AddHostCommandHandler : IRequestHandler<AddHostCommand, Guid>
         {
             private readonly Context _db;
 
-            public AddAreaCommandHandler(Context db)
+            public AddHostCommandHandler(Context db)
             {
                 _db = db;
             }
-            public async Task<Guid> Handle(AddAreaCommand request, CancellationToken cancellationToken)
+            public async Task<Guid> Handle(AddHostCommand request, CancellationToken cancellationToken)
             {
-                var area = new Area()
+                var host = new DataModels.Colony.Host()
                 {
                     Id = request.Id,
                     Name = request.Name,
                     IsActive = request.IsActive
                 };
-                await _db.Area.AddAsync(area, cancellationToken);
+                await _db.Host.AddAsync(host, cancellationToken);
                 _db.SaveChanges();
-                return area.Id;
+                return host.Id;
             }
         }
     }

@@ -5,7 +5,7 @@ using MediatR;
 using Server.CQS.DTOs;
 using Server.DataModels;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.TypicalInspection
 {
     public class AddTypicalInspectionCommand : IRequest<Guid>
     {
@@ -21,7 +21,7 @@ namespace Server.CQS.Commands
             }
             public async Task<Guid> Handle(AddTypicalInspectionCommand request, CancellationToken cancellationToken)
             {
-                var inspection = new TypicalInspection()
+                var inspection = new DataModels.TypicalInspection()
                 {
                     Id = request.TypicalInspectionDto.Id,
                     IsActive = request.TypicalInspectionDto.IsActive,

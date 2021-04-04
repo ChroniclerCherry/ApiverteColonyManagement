@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Server.CQS.Commands;
+using Server.CQS.Commands.Area;
+using Server.CQS.Commands.Colony;
+using Server.CQS.Commands.Host;
+using Server.CQS.Commands.User;
 using Server.CQS.DTOs;
 using Server.CQS.Queries;
 
@@ -43,6 +48,16 @@ namespace Server.Controllers
             return Ok(result);
         }
 
+        [HttpPost, Route("SyncColony")]
+        public async Task<IActionResult> SyncHSyncColonyost([FromBody] List<ColonyDto> colonies)
+        {
+            var result = await Mediator.Send(new SyncColonyCommand()
+            {
+                Colonies = colonies
+            });
+            return Ok(result);
+        }
+
         [HttpPost, Route("AddHost")]
         public async Task<IActionResult> AddHost(Guid id, string name, bool isActive = true)
         {
@@ -73,6 +88,16 @@ namespace Server.Controllers
             });
 
             if (result == Guid.Empty) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPost, Route("SyncHost")]
+        public async Task<IActionResult> SyncHost([FromBody] List<LookupDto> hosts)
+        {
+            var result = await Mediator.Send(new SyncHostCommand()
+            {
+                Hosts = hosts
+            });
             return Ok(result);
         }
 
@@ -109,7 +134,15 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-
+        [HttpPost, Route("SyncArea")]
+        public async Task<IActionResult> SyncArea([FromBody] List<LookupDto> areas)
+        {
+            var result = await Mediator.Send(new SyncAreaCommand()
+            {
+                Areas = areas
+            });
+            return Ok(result);
+        }
 
     }
 }

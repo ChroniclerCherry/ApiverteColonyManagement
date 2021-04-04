@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -46,14 +49,15 @@ public class UpdateWithServer extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView progressText;
     private String server_url;
+    private SharedPreferences sharedPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_server);
 
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("server_url",Context.MODE_PRIVATE);
-        server_url = sharedPref.getString("url","https://server-io6.conveyor.cloud/");
+        sharedPref = getApplicationContext().getSharedPreferences("server_url",Context.MODE_PRIVATE);
+        server_url = sharedPref.getString("server_url","https://server-io6.conveyor.cloud/");
 
         server_url_textfield = findViewById(R.id.serverAddressTextField);
         server_url_textfield.setText(server_url);
@@ -66,7 +70,6 @@ public class UpdateWithServer extends AppCompatActivity {
 
         updateButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
-                server_url = server_url_textfield.getText().toString();
                 ServerUpdate request = new ServerUpdate();
                 request.execute();
             }
@@ -79,6 +82,7 @@ public class UpdateWithServer extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            server_url = server_url_textfield.getText().toString();
             progressBar.setVisibility(View.VISIBLE);
 
         }
@@ -107,18 +111,17 @@ public class UpdateWithServer extends AppCompatActivity {
                 SyncTypicalInspection();
                 publishProgress(SYNC_SPECIAL);
                 SyncSpecialInspection();
+                publishProgress(SYNC_DONE);
             } catch (Exception ex){
                 Log.e("Error", ex.getMessage());
-                cancel(true);
                 publishProgress(SYNC_ERROR);
-                finish();
+                progressBar.setVisibility(View.INVISIBLE);
+                cancel(true);
             }
-            publishProgress(SYNC_DONE);
             return "Done";
         }
 
-        private void SyncUsers() {
-            try {
+        private void SyncUsers() throws IOException {
                 List<GeneralDTO> Local_Users = GetUsersFromLocal();
                 URL sync_users_url = new URL(server_url + "User/SyncUsers");
                 HttpURLConnection sync_users_con = (HttpURLConnection) sync_users_url.openConnection();
@@ -144,9 +147,6 @@ public class UpdateWithServer extends AppCompatActivity {
                         SaveUsersToLocal(Local_Users);
                     }
                 }
-            } catch (Exception ex){
-
-            }
 
 
         }
@@ -203,6 +203,10 @@ public class UpdateWithServer extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String args){
+            //if syncing was successful, save the server url
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("server_url",server_url);
+            editor.apply();
             progressBar.setVisibility(View.INVISIBLE);
         }
 
