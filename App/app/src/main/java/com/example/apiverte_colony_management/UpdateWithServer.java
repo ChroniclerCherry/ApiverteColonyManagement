@@ -3,17 +3,21 @@ package com.example.apiverte_colony_management;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apiverte_colony_management.DTOs.GeneralDTO;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,17 +28,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class UpdateWithServer extends AppCompatActivity {
 
     private EditText server_url_textfield;
     private Button updateButton;
     private ProgressBar progressBar;
+    private TextView progressText;
     private String server_url;
 
     @Override
@@ -48,14 +58,16 @@ public class UpdateWithServer extends AppCompatActivity {
         server_url_textfield = findViewById(R.id.serverAddressTextField);
         server_url_textfield.setText(server_url);
 
+        progressText = findViewById(R.id.progressText);
+
         updateButton = findViewById(R.id.updateButton);
         progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         updateButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 server_url = server_url_textfield.getText().toString();
                 ServerUpdate request = new ServerUpdate();
-                progressBar.setVisibility(View.VISIBLE);
                 request.execute();
             }
         });
@@ -65,144 +77,163 @@ public class UpdateWithServer extends AppCompatActivity {
     class ServerUpdate extends AsyncTask< String, Integer, String> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+
+        }
+
+        private final int SYNC_USERS = 0;
+        private final int SYNC_AREAS = 1;
+        private final int SYNC_HOSTS = 2;
+        private final int SYNC_COLONIES = 3;
+        private final int SYNC_TYPICAL = 4;
+        private final int SYNC_SPECIAL = 5;
+        private final int SYNC_DONE = 6;
+        private final int SYNC_ERROR = 7;
+
+        @Override
         protected String doInBackground(String... strings) {
             try{
+                publishProgress(SYNC_USERS);
                 SyncUsers();
+                publishProgress(SYNC_AREAS);
                 SyncAreas();
-                SyncColony();
+                publishProgress(SYNC_HOSTS);
                 SyncHost();
+                publishProgress(SYNC_COLONIES);
+                SyncColony();
+                publishProgress(SYNC_TYPICAL);
                 SyncTypicalInspection();
+                publishProgress(SYNC_SPECIAL);
                 SyncSpecialInspection();
             } catch (Exception ex){
                 Log.e("Error", ex.getMessage());
                 cancel(true);
+                publishProgress(SYNC_ERROR);
                 finish();
             }
+            publishProgress(SYNC_DONE);
             return "Done";
         }
 
-        private void SyncUsers() throws IOException {
-            List<GeneralDTO> Server_Users = GetUsersFromServer();
-            List<GeneralDTO> Local_Users = GetUsersFromLocal();
-
-            for (GeneralDTO ServerUser : Server_Users){
-                GeneralDTO local = null;
-                //grab local user with same ID as current server user
-                for (GeneralDTO l : Local_Users) {
-                    if (l.Id == ServerUser.Id) {
-                        local = l;
-                        break;
-                    }
-                }
-                if (local == null){
-                    //if the server user doesn't exist locally, add it
-                    Local_Users.add(ServerUser);
-                } else {
-                    //if the server version of the object is more recent, replace it with the server data
-                    if (local.LastModifiedDate < ServerUser.LastModifiedDate){
-                        Local_Users.remove(local);
-                        Local_Users.add(ServerUser);
-                    }
-                }
-            }
-
-            SaveUsersToLocal(Local_Users);
-            SaveUsersToServer(Local_Users);
-
-        }
-
-        private List<GeneralDTO> GetUsersFromLocal() {
-            //TODO: get users from local database
-            return null;
-        }
-
-        private void SaveUsersToLocal(List<GeneralDTO> local_Users) throws IOException {
-
-            for (GeneralDTO user : local_Users){
-                URL edit_user_url = new URL(server_url + "User/EditUser");
-                HttpURLConnection get_users_con = (HttpURLConnection) edit_user_url.openConnection();
-                get_users_con.setRequestMethod("POST");
-                get_users_con.setRequestProperty("Content-Type", "application/json; utf-8");
-                get_users_con.setRequestProperty("Accept", "application/json");
-                get_users_con.setDoOutput(true);
+        private void SyncUsers() {
+            try {
+                List<GeneralDTO> Local_Users = GetUsersFromLocal();
+                URL sync_users_url = new URL(server_url + "User/SyncUsers");
+                HttpURLConnection sync_users_con = (HttpURLConnection) sync_users_url.openConnection();
+                sync_users_con.setRequestMethod("POST");
+                sync_users_con.setRequestProperty("Content-Type", "application/json; utf-8");
+                sync_users_con.setRequestProperty("Accept", "application/json");
+                sync_users_con.setDoOutput(true);
                 Gson gson = new Gson();
-                String user_json = gson.toJson(user);
-                try(OutputStream os = get_users_con.getOutputStream()) {
-                    byte[] input = user_json.getBytes("utf-8");
+                String users_json = gson.toJson(Local_Users);
+                try(OutputStream os = sync_users_con.getOutputStream()) {
+                    byte[] input = users_json.getBytes("utf-8");
                     os.write(input, 0, input.length);
 
                     try(BufferedReader br = new BufferedReader(
-                            new InputStreamReader(get_users_con.getInputStream(), "utf-8"))) {
+                            new InputStreamReader(sync_users_con.getInputStream(), "utf-8"))) {
                         StringBuilder response = new StringBuilder();
                         String responseLine = null;
                         while ((responseLine = br.readLine()) != null) {
                             response.append(responseLine.trim());
                         }
-                        System.out.println(response.toString());
+                        Type generalDTOType = new TypeToken<ArrayList<GeneralDTO>>(){}.getType();
+                        Local_Users = gson.fromJson(response.toString(),generalDTOType);
+                        SaveUsersToLocal(Local_Users);
                     }
                 }
+            } catch (Exception ex){
+
             }
+
+
         }
 
-        private List<GeneralDTO> GetUsersFromServer() throws IOException {
-            URL get_users_url = new URL(server_url + "User/GetUsers");
-            HttpURLConnection get_users_con = (HttpURLConnection) get_users_url.openConnection();
-            InputStream response = get_users_con.getInputStream();
-            get_users_con.connect();
-            response = get_users_con.getInputStream();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
-            StringBuilder sb = new StringBuilder();
-
-
-            String line;
-            while ((line = reader.readLine()) != null)
-            {
-                sb.append(line + "\n");
-            }
-
-            String result = sb.toString();
-            List<GeneralDTO> Users = new ArrayList<>();
-            try {
-                JSONArray users_json = new JSONArray (result);
-                for (int i = 0; i < users_json.length(); i++){
-                    JSONObject user = users_json.getJSONObject(i);
-                    GeneralDTO userDTO = new Gson().fromJson(user.toString(),GeneralDTO.class);
-                    Users.add(userDTO);
-                }
-
-            } catch (JSONException ex) {
-                Log.e("Error", ex.getMessage());
-            }
-
-            get_users_con.disconnect();
-            return Users;
+        private List<GeneralDTO> GetUsersFromLocal() {
+            //TODO: query all users from database and create a list of GeneralDTO with it
+            return null;
         }
 
-        private void SaveUsersToServer(List<GeneralDTO> local_Users) throws IOException{
-            //TODO: save updated users to local db
-            URL get_users_url = new URL(server_url + "User/SaveUsers");
+        private void SaveUsersToLocal(List<GeneralDTO> users){
+            //TODO: Given the modified list of users, update all current db info with it
         }
 
         private void SyncAreas(){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         private void SyncColony(){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         private void SyncHost(){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         private void SyncTypicalInspection(){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         }
 
         private void SyncSpecialInspection(){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
         protected void onPostExecute(String args){
             progressBar.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            switch (values[0]){
+                case SYNC_USERS:
+                    progressText.setText(R.string.SyncingUsers);
+                    break;
+                case SYNC_AREAS:
+                    progressText.setText(R.string.SyncingAreas);
+                    break;
+                case SYNC_HOSTS:
+                    progressText.setText(R.string.SyncingHost);
+                    break;
+                case SYNC_COLONIES:
+                    progressText.setText(R.string.SyncingColonies);
+                    break;
+                case SYNC_TYPICAL:
+                    progressText.setText(R.string.SyncingTypical);
+                    break;
+                case SYNC_SPECIAL:
+                    progressText.setText(R.string.SyncingSpecial);
+                    break;
+                case SYNC_DONE:
+                    progressText.setText(R.string.SyncingDone);
+                    break;
+                case SYNC_ERROR:
+                    progressText.setText(R.string.SyncingError);
+                    break;
+            }
         }
     }
 }

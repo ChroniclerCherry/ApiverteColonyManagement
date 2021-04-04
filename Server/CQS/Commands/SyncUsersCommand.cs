@@ -24,6 +24,7 @@ namespace Server.CQS.Commands
             public Task<IEnumerable<LookupDto>> Handle(SyncUsersCommand request, CancellationToken cancellationToken)
             {
                 var users = request.Users;
+                if (users == null) users = new List<LookupDto>();
                 foreach (var appUser in users)
                 {
                     var localUser = _db.User.FirstOrDefault(u => u.Id == appUser.Id);
