@@ -47,5 +47,15 @@ namespace Server.Controllers
             var result = await Mediator.Send(new GetUsersQuery());
             return Ok(result);
         }
+
+        [HttpPost, Route("SyncUsers")]
+        public async Task<IActionResult> SyncUsers([FromBody] List<LookupDto> users)
+        {
+            var result = await Mediator.Send(new SyncUsersCommand()
+            {
+                Users = users
+            });
+            return Ok(result);
+        }
     }
 }

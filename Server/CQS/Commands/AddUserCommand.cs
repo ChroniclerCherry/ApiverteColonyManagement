@@ -23,7 +23,7 @@ namespace Server.CQS.Commands
             {
                 _db = db;
             }
-            public async Task<Guid> Handle(AddUserCommand request, CancellationToken cancellationToken)
+            public Task<Guid> Handle(AddUserCommand request, CancellationToken cancellationToken)
             {
                 var user = new User()
                 {
@@ -31,9 +31,9 @@ namespace Server.CQS.Commands
                     Name = request.Name,
                     IsActive = request.IsActive
                 };
-                await _db.User.AddAsync(user, cancellationToken);
+                _db.User.Add(user);
                 _db.SaveChanges();
-                return user.Id;
+                return Task.FromResult(user.Id);
             }
         }
     }
