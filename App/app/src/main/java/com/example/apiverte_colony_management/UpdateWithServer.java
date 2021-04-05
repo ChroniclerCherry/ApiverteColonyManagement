@@ -17,7 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.apiverte_colony_management.DTOs.ColonyDTO;
 import com.example.apiverte_colony_management.DTOs.GeneralDTO;
+import com.example.apiverte_colony_management.DTOs.SpecialInspectionDTO;
+import com.example.apiverte_colony_management.DTOs.TypicalInspectionDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -138,7 +141,7 @@ public class UpdateWithServer extends AppCompatActivity {
                     try(BufferedReader br = new BufferedReader(
                             new InputStreamReader(sync_users_con.getInputStream(), "utf-8"))) {
                         StringBuilder response = new StringBuilder();
-                        String responseLine = null;
+                        String responseLine;
                         while ((responseLine = br.readLine()) != null) {
                             response.append(responseLine.trim());
                         }
@@ -147,8 +150,6 @@ public class UpdateWithServer extends AppCompatActivity {
                         SaveUsersToLocal(Local_Users);
                     }
                 }
-
-
         }
 
         private List<GeneralDTO> GetUsersFromLocal() {
@@ -160,45 +161,189 @@ public class UpdateWithServer extends AppCompatActivity {
             //TODO: Given the modified list of users, update all current db info with it
         }
 
-        private void SyncAreas(){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        private void SyncAreas() throws IOException {
+            List<GeneralDTO> Local_Areas = GetAreasFromLocal();
+            URL sync_areas_url = new URL(server_url + "Colony/SyncArea");
+            HttpURLConnection sync_areas_con = (HttpURLConnection) sync_areas_url.openConnection();
+            sync_areas_con.setRequestMethod("POST");
+            sync_areas_con.setRequestProperty("Content-Type", "application/json; utf-8");
+            sync_areas_con.setRequestProperty("Accept", "application/json");
+            sync_areas_con.setDoOutput(true);
+            Gson gson = new Gson();
+            String areas_json = gson.toJson(Local_Areas);
+            try(OutputStream os = sync_areas_con.getOutputStream()) {
+                byte[] input = areas_json.getBytes("utf-8");
+                os.write(input, 0, input.length);
+
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(sync_areas_con.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Type generalDTOType = new TypeToken<ArrayList<GeneralDTO>>(){}.getType();
+                    Local_Areas = gson.fromJson(response.toString(),generalDTOType);
+                    SaveAreasToLocal(Local_Areas);
+                }
             }
         }
 
-        private void SyncColony(){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        private List<GeneralDTO> GetAreasFromLocal() {
+            //TODO: query all areas from database and create a list of GeneralDTO with it
+            return null;
+        }
+
+        private void SaveAreasToLocal(List<GeneralDTO> users){
+            //TODO: Given the modified list of areas, update all current db info with it
+        }
+
+        private void SyncHost() throws IOException {
+            List<GeneralDTO> Local_hosts = GetHostsFromLocal();
+            URL sync_hosts_url = new URL(server_url + "Colony/SyncHost");
+            HttpURLConnection sync_host_con = (HttpURLConnection) sync_hosts_url.openConnection();
+            sync_host_con.setRequestMethod("POST");
+            sync_host_con.setRequestProperty("Content-Type", "application/json; utf-8");
+            sync_host_con.setRequestProperty("Accept", "application/json");
+            sync_host_con.setDoOutput(true);
+            Gson gson = new Gson();
+            String host_json = gson.toJson(Local_hosts);
+            try(OutputStream os = sync_host_con.getOutputStream()) {
+                byte[] input = host_json.getBytes("utf-8");
+                os.write(input, 0, input.length);
+
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(sync_host_con.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Type generalDTOType = new TypeToken<ArrayList<GeneralDTO>>(){}.getType();
+                    Local_hosts = gson.fromJson(response.toString(),generalDTOType);
+                    SaveHostsToLocal(Local_hosts);
+                }
             }
         }
 
-        private void SyncHost(){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        private List<GeneralDTO> GetHostsFromLocal() {
+            //TODO: query all hosts from database and create a list of GeneralDTO with it
+            return null;
+        }
+
+        private void SaveHostsToLocal(List<GeneralDTO> users){
+            //TODO: Given the modified list of hosts, update all current db info with it
+        }
+
+        private void SyncColony() throws IOException {
+            List<ColonyDTO> Local_colonies = GetColoniesFromLocal();
+            URL sync_colonies_url = new URL(server_url + "Colony/SyncColony");
+            HttpURLConnection sync_colony_con = (HttpURLConnection) sync_colonies_url.openConnection();
+            sync_colony_con.setRequestMethod("POST");
+            sync_colony_con.setRequestProperty("Content-Type", "application/json; utf-8");
+            sync_colony_con.setRequestProperty("Accept", "application/json");
+            sync_colony_con.setDoOutput(true);
+            Gson gson = new Gson();
+            String colony_json = gson.toJson(Local_colonies);
+            try(OutputStream os = sync_colony_con.getOutputStream()) {
+                byte[] input = colony_json.getBytes("utf-8");
+                os.write(input, 0, input.length);
+
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(sync_colony_con.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Type colonyDTOType = new TypeToken<ArrayList<ColonyDTO>>(){}.getType();
+                    Local_colonies = gson.fromJson(response.toString(),colonyDTOType);
+                    SaveColoniesToLocal(Local_colonies);
+                }
             }
         }
 
-        private void SyncTypicalInspection(){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+        private List<ColonyDTO> GetColoniesFromLocal() {
+            //TODO: query all users from database and create a list of GeneralDTO with it
+            return null;
         }
 
-        private void SyncSpecialInspection(){
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        private void SaveColoniesToLocal(List<ColonyDTO> users){
+            //TODO: Given the modified list of users, update all current db info with it
+        }
+
+        private void SyncTypicalInspection() throws IOException {
+            List<TypicalInspectionDTO> Local_typical = GetTypicalInspectionsFromLocal();
+            URL sync_typical_url = new URL(server_url + "Inspection/SyncTypicalInspection");
+            HttpURLConnection sync_typical_con = (HttpURLConnection) sync_typical_url.openConnection();
+            sync_typical_con.setRequestMethod("POST");
+            sync_typical_con.setRequestProperty("Content-Type", "application/json; utf-8");
+            sync_typical_con.setRequestProperty("Accept", "application/json");
+            sync_typical_con.setDoOutput(true);
+            Gson gson = new Gson();
+            String typical_json = gson.toJson(Local_typical);
+            try(OutputStream os = sync_typical_con.getOutputStream()) {
+                byte[] input = typical_json.getBytes("utf-8");
+                os.write(input, 0, input.length);
+
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(sync_typical_con.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Type typicalDTOType = new TypeToken<ArrayList<TypicalInspectionDTO>>(){}.getType();
+                    Local_typical = gson.fromJson(response.toString(),typicalDTOType);
+                    SaveTypicalInspectionsToLocal(Local_typical);
+                }
             }
+        }
+
+        private List<TypicalInspectionDTO> GetTypicalInspectionsFromLocal() {
+            //TODO: query all typical inspections from database and create a list of GeneralDTO with it
+            return null;
+        }
+
+        private void SaveTypicalInspectionsToLocal(List<TypicalInspectionDTO> users){
+            //TODO: Given the modified list of typical inspections, update all current db info with it
+        }
+
+        private void SyncSpecialInspection() throws IOException {
+            List<SpecialInspectionDTO> Local_special = GetSpecialInspectionsFromLocal();
+            URL sync_special_url = new URL(server_url + "Inspection/SyncSpecialInspection");
+            HttpURLConnection sync_special_con = (HttpURLConnection) sync_special_url.openConnection();
+            sync_special_con.setRequestMethod("POST");
+            sync_special_con.setRequestProperty("Content-Type", "application/json; utf-8");
+            sync_special_con.setRequestProperty("Accept", "application/json");
+            sync_special_con.setDoOutput(true);
+            Gson gson = new Gson();
+            String special_json = gson.toJson(Local_special);
+            try(OutputStream os = sync_special_con.getOutputStream()) {
+                byte[] input = special_json.getBytes("utf-8");
+                os.write(input, 0, input.length);
+
+                try(BufferedReader br = new BufferedReader(
+                        new InputStreamReader(sync_special_con.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Type specialDTOType = new TypeToken<ArrayList<SpecialInspectionDTO>>(){}.getType();
+                    Local_special = gson.fromJson(response.toString(),specialDTOType);
+                    SaveSpecialInspectionsToLocal(Local_special);
+                }
+            }
+        }
+
+        private List<SpecialInspectionDTO> GetSpecialInspectionsFromLocal() {
+            //TODO: query all special inspections from database and create a list of GeneralDTO with it
+            return null;
+        }
+
+        private void SaveSpecialInspectionsToLocal(List<SpecialInspectionDTO> users){
+            //TODO: Given the modified list of special inspections, update all current db info with it
         }
 
         @Override
