@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +44,16 @@ namespace Server.Controllers
             return Ok(result);
         }
 
+        [HttpPost, Route("SyncTypicalInspection")]
+        public async Task<IActionResult> SyncTypicalInspection([FromBody] List<TypicalInspectionDto> inspections)
+        {
+            var result = await Mediator.Send(new SyncTypicalInspectionCommand()
+            {
+                Inspections = inspections
+            });
+            return Ok(result);
+        }
+
         [HttpPost, Route("AddSpecialInspection")]
         public async Task<IActionResult> AddSpecialInspection(SpecialInspectionDto dto)
         {
@@ -67,6 +78,16 @@ namespace Server.Controllers
         public async Task<IActionResult> GetSpecialInspections()
         {
             var result = await Mediator.Send(new GetSpecialInspectionsQuery());
+            return Ok(result);
+        }
+
+        [HttpPost, Route("SyncSpecialInspection")]
+        public async Task<IActionResult> SyncSpecialInspection([FromBody] List<SpecialInspectionDto> inspections)
+        {
+            var result = await Mediator.Send(new SyncSpecialInspectionCommand()
+            {
+                Inspections = inspections
+            });
             return Ok(result);
         }
     }
