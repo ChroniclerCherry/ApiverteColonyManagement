@@ -102,35 +102,10 @@ public class TypicalInspection extends AppCompatActivity {
         Spinner fitnessSpinner = (Spinner)findViewById(R.id.fitnessSpinner);
         fitnessSpinner.setAdapter(populationAdapter);
 
-        saveBtn = findViewById(R.id.typicalInspectionSaveButton);
 
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String population = populationSpinner.getSelectedItem().toString();
-                String mood = moodSpinner.getSelectedItem().toString();
-
-
-
-                Inspection inspection = new Inspection();
-                inspection.setPopulation(population);
-                inspection.setMood(mood);
-
-
-                TypicalInspection.myAppDatabase.myDao().addInspection(inspection);
-                Toast.makeText(TypicalInspection.this, "Inspection added successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        myAppDatabase = Room.databaseBuilder(getApplicationContext(),MyAppDatabase.class, "inspectiondb").allowMainThreadQueries().build();
-/*
-
-        */
 /*
         Hive Bodies
-         *//*
+   */
 
         ArrayAdapter<String> broodChambersAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodChambers);
         broodChambersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -146,31 +121,31 @@ public class TypicalInspection extends AppCompatActivity {
         ventsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner ventsSpinner = (Spinner)findViewById(R.id.ventsSpinner);
         ventsSpinner.setAdapter(populationAdapter);
-
-        */
 /*
+
         Frames
-         *//*
+
+*/
 
         ArrayAdapter<String> broadPatternAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, broodPattern);
         broadPatternAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner broadPatternSpinner = (Spinner)findViewById(R.id.broodPatternSpinner);
         broadPatternSpinner.setAdapter(broadPatternAdapter);
-
-        */
 /*
+
         Modifications
-         *//*
+
+*/
 
 
         //
         // -------------------------Multi select options-----------------------------------
         //
-
-        */
 /*
+
         Queen
-         *//*
+
+*/
 
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, status);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -185,9 +160,30 @@ public class TypicalInspection extends AppCompatActivity {
         ArrayAdapter<String> swarmStatusAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, swarmStatus);
         swarmStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner swarmStatusSpinner = (Spinner)findViewById(R.id.swarmStatusSpinner);
-        cellsSpinner.setAdapter(swarmStatusAdapter);
+        swarmStatusSpinner.setAdapter(swarmStatusAdapter);
 
-*/
+        saveBtn = findViewById(R.id.typicalInspectionSaveButton);
 
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String population = statusSpinner.getSelectedItem().toString();
+                String mood = cellsSpinner.getSelectedItem().toString();
+
+
+
+                Inspection inspection = new Inspection();
+                inspection.setPopulation(population);
+                inspection.setMood(mood);
+
+
+                TypicalInspection.myAppDatabase.myDao().addInspection(inspection);
+                Toast.makeText(TypicalInspection.this, "Inspection added successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        myAppDatabase = Room.databaseBuilder(getApplicationContext(),MyAppDatabase.class, "inspectiondb").allowMainThreadQueries().build();
     }
 }

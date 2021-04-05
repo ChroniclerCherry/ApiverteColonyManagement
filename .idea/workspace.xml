@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e9a5a94-0307-4bb1-9d9e-7ac44e525ee9" name="Default Changelist" comment="" />
+    <list default="true" id="6e9a5a94-0307-4bb1-9d9e-7ac44e525ee9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/TypicalInspection.java" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/src/main/java/com/example/apiverte_colony_management/TypicalInspection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/app/src/main/res/layout/activity_typical_inspection.xml" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/src/main/res/layout/activity_typical_inspection.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/app/src/main/res/layout/fragment_read_inspections.xml" beforeDir="false" afterPath="$PROJECT_DIR$/App/app/src/main/res/layout/fragment_read_inspections.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +26,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../final_groupProject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>

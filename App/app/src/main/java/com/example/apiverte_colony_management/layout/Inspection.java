@@ -3,22 +3,27 @@ package com.example.apiverte_colony_management.layout;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
+
 @Entity(tableName = "inspections")
 public class Inspection {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id = 0;
+    @PrimaryKey
+    @NotNull
+    private UUID id;
 
     private String population;
     private String mood;
 
 
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
