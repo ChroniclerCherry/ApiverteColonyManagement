@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.apiverte_colony_management.layout.Inspection;
 
 import java.util.List;
+import java.util.UUID;
 
 
 public class ReadInspections extends AppCompatActivity {
@@ -31,11 +32,11 @@ private TextView displayInspection;
 
         for ( Inspection i : inspections) {
 
-            int id = i.getId();
+           // String id = i.getId().toString();
             String population = i.getPopulation();
             String mood = i.getMood();
 
-            info = info + " \n\n" + "id :"+id+"\n population :"+population+"\n mood :"+mood;
+            info = info + " \n\n" + "id :"+"\n population :"+population+"\n mood :"+mood;
         }
 
         displayInspection.setText(info);
