@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Server.Queries.DTOs
+namespace Server.CQS.DTOs
 {
     public class LookupDto
     {
@@ -9,5 +9,11 @@ namespace Server.Queries.DTOs
         public string Name { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string CreatedBy { get; set; }
+        public long CreatedDate { get; set; }
+        public string LastModifiedBy { get; set; }
+        public long LastModifiedDate { get; set; }
+
     }
 }

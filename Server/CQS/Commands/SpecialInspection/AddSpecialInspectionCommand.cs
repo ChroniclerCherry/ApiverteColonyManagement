@@ -2,9 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Server.CQS.DTOs;
 using Server.DataModels;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.SpecialInspection
 {
     public class AddSpecialInspectionCommand : IRequest<Guid>
     {
@@ -20,7 +21,7 @@ namespace Server.CQS.Commands
             }
             public async Task<Guid> Handle(AddSpecialInspectionCommand request, CancellationToken cancellationToken)
             {
-                var inspection = new SpecialInspection()
+                var inspection = new DataModels.SpecialInspection()
                 {
                     Id = request.SpecialInspectionDto.Id,
                     IsActive = request.SpecialInspectionDto.IsActive,

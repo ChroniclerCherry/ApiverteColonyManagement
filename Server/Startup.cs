@@ -34,7 +34,7 @@ namespace Server
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SIS API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Apiverte AP", Version = "v1" });
             });
 
             services.AddMediatR(Assembly.GetExecutingAssembly());

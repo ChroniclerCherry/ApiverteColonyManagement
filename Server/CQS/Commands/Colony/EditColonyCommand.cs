@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.CQS.DTOs;
 using Server.DataModels;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.Colony
 {
     public class EditColonyCommand : IRequest<Guid>
     {
