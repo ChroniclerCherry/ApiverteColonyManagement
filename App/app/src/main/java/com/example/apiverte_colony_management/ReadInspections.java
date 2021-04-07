@@ -26,6 +26,7 @@ private TextView displayInspection;
         setContentView(R.layout.fragment_read_inspections);
 
         displayInspection = findViewById(R.id.displayinspection);
+
         List<Inspection> inspections = TypicalInspection.myAppDatabase.myDao().getInspections();
 
         String info = "";

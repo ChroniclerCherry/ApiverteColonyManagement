@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import android.os.Bundle;
 import android.view.View;
@@ -172,12 +173,9 @@ public class TypicalInspection extends AppCompatActivity {
                 String population = statusSpinner.getSelectedItem().toString();
                 String mood = cellsSpinner.getSelectedItem().toString();
 
-
-
                 Inspection inspection = new Inspection();
                 inspection.setPopulation(population);
                 inspection.setMood(mood);
-
 
                 TypicalInspection.myAppDatabase.myDao().addInspection(inspection);
                 Toast.makeText(TypicalInspection.this, "Inspection added successfully", Toast.LENGTH_SHORT).show();

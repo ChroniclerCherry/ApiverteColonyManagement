@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity(tableName = "inspections")
@@ -16,8 +17,12 @@ public class Inspection {
 
     private String population;
     private String mood;
+    //private Date date;
 
+    public Inspection() {
 
+        this.id = UUID.randomUUID();
+    }
 
     public UUID getId() {
         return id;
@@ -42,4 +47,5 @@ public class Inspection {
     public void setMood(String mood) {
         this.mood = mood;
     }
+
 }
