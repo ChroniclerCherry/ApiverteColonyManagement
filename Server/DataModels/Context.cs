@@ -51,7 +51,7 @@ namespace Server.DataModels
         {
             if (!(entry.Entity is IEntity entity)) return;
             if (Entry(entity).State != EntityState.Added && Entry(entity).State != EntityState.Modified) return;
-            entity.LastModifiedDate = DateTime.UtcNow;
+            entity.LastModifiedDate = DateTime.UtcNow.Ticks;
             entity.LastModifiedBy = GetTrackingBy(overrideBy);
         }
 
@@ -69,8 +69,8 @@ namespace Server.DataModels
         {
             if (!(entry.Entity is IEntity entity)) return;
             if (Entry(entity).State != EntityState.Added) return;
-            if (!string.IsNullOrEmpty(entity.CreatedBy) && entity.CreatedDate != DateTime.MinValue) return;
-            entity.CreatedDate = DateTime.UtcNow;
+            if (!string.IsNullOrEmpty(entity.CreatedBy) && entity.CreatedDate != DateTime.MinValue.Second) return;
+            entity.CreatedDate = DateTime.UtcNow.Ticks;
             entity.CreatedBy = GetTrackingBy(overrideBy);
         }
 

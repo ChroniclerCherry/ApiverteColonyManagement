@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.Queries.DTOs;
 
-namespace Server.Queries.GetLookups
+namespace Server.CQS.Queries
 {
     public class GetHostsQuery : IRequest<IEnumerable<LookupDto>>
     {
@@ -22,11 +22,15 @@ namespace Server.Queries.GetLookups
 
             public async Task<IEnumerable<LookupDto>> Handle(GetHostsQuery request, CancellationToken cancellationToken)
             {
-                return await _db.Host.Select(a => new LookupDto()
+                return await _db.Host.Select(h => new LookupDto()
                 {
-                    Id = a.Id,
-                    Name = a.Name,
-                    IsActive = a.IsActive
+                    Id = h.Id,
+                    Name = h.Name,
+                    IsActive = h.IsActive,
+                    CreatedBy = h.CreatedBy,
+                    CreatedDate = h.CreatedDate,
+                    LastModifiedBy = h.LastModifiedBy,
+                    LastModifiedDate = h.LastModifiedDate,
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.DTOs
 {
     public class TypicalInspectionDto
     {
         public Guid Id { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public long LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
         public Guid? UserId { get; set; }
 

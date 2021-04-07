@@ -30,10 +30,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 56, DateTimeKind.Local).AddTicks(4982));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818119170L);
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -45,10 +45,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 56, DateTimeKind.Local).AddTicks(5298));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818119483L);
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -84,10 +84,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 58, DateTimeKind.Local).AddTicks(1302));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818135428L);
 
                     b.Property<string>("GeneticBreed")
                         .HasColumnType("text");
@@ -101,8 +101,8 @@ namespace Server.Migrations
                     b.Property<Guid>("HostId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("InstallDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<long>("InstallDate")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("InstallationType")
                         .HasColumnType("text");
@@ -117,10 +117,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 58, DateTimeKind.Local).AddTicks(1652));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818135764L);
 
                     b.Property<string>("Markings")
                         .HasColumnType("text");
@@ -151,10 +151,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 60, DateTimeKind.Local).AddTicks(5459));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818159620L);
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -166,10 +166,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 60, DateTimeKind.Local).AddTicks(5796));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818159965L);
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -193,10 +193,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 43, DateTimeKind.Local).AddTicks(5497));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818012527L);
 
                     b.Property<string[]>("Feeds")
                         .HasColumnType("text[]");
@@ -217,10 +217,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 48, DateTimeKind.Local).AddTicks(9790));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818045550L);
 
                     b.Property<string[]>("TreatmentDetails")
                         .HasColumnType("text[]");
@@ -269,10 +269,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 53, DateTimeKind.Local).AddTicks(7439));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818091876L);
 
                     b.Property<bool>("Excluder")
                         .HasColumnType("boolean");
@@ -305,10 +305,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 53, DateTimeKind.Local).AddTicks(7821));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818092256L);
 
                     b.Property<string>("Mood")
                         .HasColumnType("text");
@@ -363,10 +363,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<long>("CreatedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 55, DateTimeKind.Local).AddTicks(3029));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818107181L);
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -378,10 +378,10 @@ namespace Server.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("System");
 
-                    b.Property<DateTime>("LastModifiedDate")
+                    b.Property<long>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 10, 50, 16, 55, DateTimeKind.Local).AddTicks(3352));
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(637530607818107503L);
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

@@ -5,8 +5,10 @@
     <uses-sdk
         android:minSdkVersion="21"
         android:targetSdkVersion="30" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,6 +26,7 @@
         <activity
             android:name=".CreateColonyPage"
             android:label="Create Colony" />
+        <activity  android:name=".UpdateWithServer"/>
     </application>
 
 </manifest>

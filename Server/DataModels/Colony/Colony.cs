@@ -8,9 +8,9 @@ namespace Server.DataModels.Colony
     {
         public Guid Id { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public long LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
 
         //Colony Location
@@ -37,7 +37,7 @@ namespace Server.DataModels.Colony
         public string AdditionalInfo { get; set; }
 
         //Colony Setup
-        public DateTime InstallDate { get; set; }
+        public long InstallDate { get; set; }
 
         public string HiveType { get; set; }
         public string BroodChamberType { get; set; }
@@ -60,9 +60,9 @@ namespace Server.DataModels.Colony
             builder.Property(colony => colony.LastModifiedBy)
                 .HasDefaultValue("System");
             builder.Property(colony => colony.CreatedDate)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValue(DateTime.Now.Ticks);
             builder.Property(colony => colony.LastModifiedDate)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValue(DateTime.Now.Ticks);
 
             builder.HasOne(colony => colony.Host)
                 .WithMany(host => host.Colonies)
