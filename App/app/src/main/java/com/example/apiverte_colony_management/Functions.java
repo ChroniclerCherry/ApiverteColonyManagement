@@ -27,12 +27,12 @@ public class Functions extends AppCompatActivity {
             startActivity(goToAddNewColony);
         } });
 
-//        Button typical_inspection = findViewById(R.id.typical_inspection);
-//        typical_inspection.setOnClickListener( new View.OnClickListener()
-//        {   public void onClick(View v) {
-//            Intent goToTypicalInspection = new Intent(Functions.this, TypicalInspection.class);
-//            goToTypicalInspection.putExtra("USER", user);
-//            startActivity(goToTypicalInspection);
-//        } });
+        Button special_inspection = findViewById(R.id.special_inspection);
+        special_inspection.setOnClickListener( new View.OnClickListener()
+        {   public void onClick(View v) {
+            Intent goToSpecialInspection = new Intent(Functions.this, SpecialInspectionPage.class);
+            goToSpecialInspection.putExtra("USER", user);
+            startActivity(goToSpecialInspection);
+        } });
     }
 }

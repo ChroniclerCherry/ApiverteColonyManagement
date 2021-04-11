@@ -24,9 +24,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="300dp"
             app:srcCompat="@drawable/logo"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="50dp" />
 
     </LinearLayout>
 
@@ -47,35 +46,28 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/sign_in"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="110dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:background="#09AB4D"
+        android:text="@string/sign_in"
+        android:textColor="#ffffff"
+        android:textSize="50sp" />
 
-        <Button
-            android:id="@+id/sign_in"
-            android:layout_width="0dp"
-            android:layout_height="110dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:background="#09AB4D"
-            android:text="@string/sign_in"
-            android:textColor="#ffffff"
-            android:textSize="50sp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/manage_users"
-            android:layout_width="0dp"
-            android:layout_height="110dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="30dp"
-            android:background="#09AB4D"
-            android:text="@string/manage_users"
-            android:textColor="#ffffff"
-            android:textSize="50sp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/manage_users"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:background="#09AB4D"
+        android:text="@string/manage_users"
+        android:textColor="#ffffff"
+        android:textSize="50sp" />
 
 </LinearLayout>
