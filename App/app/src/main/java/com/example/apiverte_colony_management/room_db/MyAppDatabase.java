@@ -1,16 +1,8 @@
-package com.example.apiverte_colony_management.layout;
+package com.example.apiverte_colony_management.room_db;
 
-import android.content.Context;
-
-import androidx.room.Dao;
 import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
-
-import java.util.Date;
-import java.util.UUID;
 
 @Database(entities = {Inspection.class}, version = 1, exportSchema = false)
 @TypeConverters({UUIDConverter.class, DateConverter.class})
@@ -19,7 +11,7 @@ public abstract class MyAppDatabase extends RoomDatabase {
     private static MyAppDatabase INSTANCE;
     private static final String DATABASE_NAME = "InspectionDatabase";
 
-    public abstract MyDao myDao();
+    public abstract TypicalInspectionDAO myDao();
 
 
    /* public static void init(Context context) {
