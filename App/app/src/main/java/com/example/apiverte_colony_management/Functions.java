@@ -29,6 +29,14 @@ public class Functions extends AppCompatActivity {
             startActivity(goToAddNewColony);
         } });
 
+        Button special_inspection = findViewById(R.id.special_inspection);
+        special_inspection.setOnClickListener( new View.OnClickListener()
+        {   public void onClick(View v) {
+            Intent goToSpecialInspection = new Intent(Functions.this, SpecialInspectionPage.class);
+            goToSpecialInspection.putExtra("USER", user);
+            startActivity(goToSpecialInspection);
+        } });
+
         Button update = findViewById(R.id.update);
         update.setOnClickListener( new View.OnClickListener()
         {   public void onClick(View v) {

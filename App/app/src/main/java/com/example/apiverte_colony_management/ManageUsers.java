@@ -108,7 +108,7 @@ public class ManageUsers extends AppCompatActivity {
         //Now the results object has rows of results that match the query.
         //find the column indices:
         int idColIndex = results.getColumnIndex(UsersMyOpener.COL_ID);
-        int nameColumnIndex = results.getColumnIndex(UsersMyOpener.COL_NAME);
+        int nameColIndex = results.getColumnIndex(UsersMyOpener.COL_NAME);
         int createdByColIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDBY);
         int createdDateColumnIndex = results.getColumnIndex(UsersMyOpener.COL_CREATEDDATE);
         int lastModifiedByColIndex = results.getColumnIndex(UsersMyOpener.COL_LASTMODIFIEDBY);
@@ -119,7 +119,7 @@ public class ManageUsers extends AppCompatActivity {
         while(results.moveToNext())
         {
             long id = results.getLong(idColIndex);
-            String name = results.getString(nameColumnIndex);
+            String name = results.getString(nameColIndex);
             String createdBy = results.getString(createdByColIndex);
             String createdDate = results.getString(createdDateColumnIndex);
             String lastModifiedBy = results.getString(lastModifiedByColIndex);
@@ -168,7 +168,7 @@ public class ManageUsers extends AppCompatActivity {
 
     protected void deleteItem(Users c)
     {
-        //db.delete(UsersMyOpener.TABLE_NAME, "_id=?", new String[] { Long.toString(c.getId()) } );
+        //db.delete(UsersMyOpener.TABLE_NAME, "Id=?", new String[] { Long.toString(c.getId()) } );
         ContentValues dataToInsert = new ContentValues();
         dataToInsert.put(UsersMyOpener.COL_ISACTIVE, "false");
         dataToInsert.put(UsersMyOpener.COL_LASTMODIFIEDDATE, String.valueOf(LocalDateTime.now()));

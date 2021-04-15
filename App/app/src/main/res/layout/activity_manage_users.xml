@@ -13,7 +13,8 @@
         android:text="@string/manage_users"
         android:layout_centerHorizontal="true"
         android:textSize="60dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#09AB4D"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
@@ -31,7 +32,7 @@
 
     <EditText
         android:id="@+id/add_user"
-        android:layout_width="977dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/back"
         android:layout_marginLeft="20pt"
@@ -58,6 +59,8 @@
         android:layout_height="wrap_content"
         android:text="@string/back"
         android:textSize="40dp"
+        android:background="#09AB4D"
+        android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
