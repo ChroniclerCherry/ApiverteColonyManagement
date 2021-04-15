@@ -48,7 +48,7 @@
     <string name="add_user">Type new user name here</string>
     <string name="back">Back</string>
     <string name="add">Add</string>
-    <string name="add_new_colony">Add New Colony</string>
+    <string name="colony_management">Colony Management</string>
     <string name="typical_inspection">Typical Inspection</string>
     <string name="special_inspection">Special Inspection</string>
     <string name="reporting">Reporting</string>

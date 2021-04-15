@@ -2,6 +2,8 @@ package com.example.apiverte_colony_management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -21,13 +23,13 @@ public class DeleteColonyPage extends AppCompatActivity {
         setContentView(R.layout.activity_delete_colony);
 
         colSelectList.add("Select a Colony...");
-        colSelectList.add("Test");
 
         //Create the colonySelect spinner
         ArrayAdapter<String> colSelectAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_item, colSelectList);
         colSelectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner colSelectSpinner = findViewById(R.id.deleteSelectColonySpinner);
         colSelectSpinner.setAdapter(colSelectAdapter);
+
 
         Button submitButton = findViewById(R.id.deleteColonySubmitButton);
         submitButton.setOnClickListener(v -> {

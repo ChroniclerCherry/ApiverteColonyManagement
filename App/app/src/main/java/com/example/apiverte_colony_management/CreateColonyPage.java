@@ -1,5 +1,5 @@
 package com.example.apiverte_colony_management;
-
+//I know, it's terrible. Don't judge me too harshly.
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +15,29 @@ import java.util.List;
 public class CreateColonyPage extends AppCompatActivity {
 
     //Declare needed lists/variables
-    ArrayList<String> areaList = new ArrayList<>();
-    List<String> hostList = new ArrayList<>();
-    List<String> hiveNumList = new ArrayList<>();
-    List<String> queenList = new ArrayList<>();
-    List<String> geneticsList = new ArrayList<>();
-    List<String> installTypeList = new ArrayList<>();
-    List<String> hiveTypeList = new ArrayList<>();
-    List<String> broodChamberList = new ArrayList<>();
-    List<String> queenExcluderList = new ArrayList<>();
+    private ArrayList<String> areaList = new ArrayList<>();
+    private List<String> hostList = new ArrayList<>();
+    private List<String> hiveNumList = new ArrayList<>();
+    private List<String> queenList = new ArrayList<>();
+    private List<String> geneticsList = new ArrayList<>();
+    private List<String> installTypeList = new ArrayList<>();
+    private List<String> hiveTypeList = new ArrayList<>();
+    private List<String> broodChamberList = new ArrayList<>();
+    private List<String> queenExcluderList = new ArrayList<>();
 
     //col short for 'colony'
-    String colArea, colHost, colSource, colQueen, colGenetics, colInstall, colHiveType, colBroodChamber, colQueenExcluder;
-    int colNum, colHiveNum;
+    String colArea, colHost, colSource, colQueen, colGenetics, colInstall, colHiveType, colBroodChamber, colQueenExcluder, colNum, colHiveNum;
+
+    //Declare DB
+    public static ColonyDatabase colonyDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_colony);
         String userName = getIntent().getStringExtra("EXTRA_SESSION_ID");
+        getApplicationContext().getApplicationContext().deleteDatabase("ColonyDB");
+        colonyDatabase = Room.databaseBuilder(getApplicationContext(),ColonyDatabase.class, "ColonyDB").allowMainThreadQueries().build();
 
         //Populate lists for spinner selection
         //Note: Will be replaced by DB query results
@@ -78,10 +83,8 @@ public class CreateColonyPage extends AppCompatActivity {
         broodChamberList.add("Brood3");
         broodChamberList.add("Brood4");
 
-        queenExcluderList.add("Excluder1");
-        queenExcluderList.add("Excluder2");
-        queenExcluderList.add("Excluder3");
-        queenExcluderList.add("Excluder4");
+        queenExcluderList.add("Yes");
+        queenExcluderList.add("No");
 
 
         //Create the areaList spinner
@@ -142,10 +145,26 @@ public class CreateColonyPage extends AppCompatActivity {
         //Create Back and Submit buttons
         Button submitButton = findViewById(R.id.createColonySubmitButton);
         submitButton.setOnClickListener(v -> {
+            ColonyData thisCol = new ColonyData();
+
+            thisCol.setColArea(1);
+            thisCol.setColHost(1);
+            thisCol.setColHiveNum(1);
+            thisCol.setColQueen(queenSpinner.getSelectedItem().toString());
+            thisCol.setColGenetics(geneticsSpinner.getSelectedItem().toString());
+            thisCol.setColInstallType(installSpinner.getSelectedItem().toString());
+            thisCol.setColInstallDate("2000-20-02");
+            thisCol.setColHiveType(hiveTypeSpinner.getSelectedItem().toString());
+            thisCol.setColBroodChamber(broodChamberSpinner.getSelectedItem().toString());
+            thisCol.setColQueenExcluder(queenExcluderSpinner.getSelectedItem().toString() == "Yes" ? true : false);
+
+            colonyDatabase.colonyDataDAO().insert(thisCol);
+            Toast.makeText(this, R.string.createColonyPageSubmitMessage + " " + colHost + " - " + colArea + " - " + colNum, Toast.LENGTH_SHORT).show();
+
             Intent refresh = getIntent();
             finish();
             startActivity(refresh);
-            Toast.makeText(this, R.string.createColonyPageSubmitMessage, Toast.LENGTH_SHORT).show();
+
         });
 
         Button returnButton = findViewById(R.id.createColonyReturnButton);

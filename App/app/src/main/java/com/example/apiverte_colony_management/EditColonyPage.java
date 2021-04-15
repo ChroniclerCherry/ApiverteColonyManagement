@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +31,23 @@ public class EditColonyPage extends AppCompatActivity {
     String colArea, colHost, colSource, colQueen, colGenetics, colInstall, colHiveType, colBroodChamber, colQueenExcluder;
     int colNum, colHiveNum;
 
+    //Intialize DB and DB list
+    public static ColonyDatabase colonyDatabase;
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_colony);
+        colonyDatabase = Room.databaseBuilder(getApplicationContext(),ColonyDatabase.class, "ColonyDB").allowMainThreadQueries().build();
+        List<ColonyData> colData = colonyDatabase.colonyDataDAO().getColData();
 
         //Populate lists for spinner selection
         //Note: Will be replaced by DB query results
         colSelectList.add("Select a Colony...");
-        colSelectList.add("Test");
+        for (ColonyData colRow: colData) {
+            colSelectList.add(colRow.getColColonyNum());
+        }
+
 
         areaList.add("Area1");
         areaList.add("Area2");
