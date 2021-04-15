@@ -19,6 +19,10 @@
         <activity android:name=".ManageSpecialInspections" />
         <activity android:name=".SpecialInspectionPage" />
         <activity android:name=".ManageUsers" />
+        <activity android:name=".TypicalInspection"></activity>
+        <activity android:name=".ReadInspections"></activity>
+        <activity android:name=".IdentifyColony" />
+        <activity android:name=".ManageUsers" />
         <activity android:name=".Functions" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -30,6 +34,14 @@
         <activity
             android:name=".CreateColonyPage"
             android:label="Create Colony" />
+        <activity
+            android:name=".ColonyManagementPage"
+            android:label="Colony Management" />
+        <activity
+            android:name=".EditColonyPage"
+            android:label="Edit Colony" />
+        <activity android:name=".DeleteColonyPage"
+            android:label="Delete Colony" />
         <activity  android:name=".UpdateWithServer"/>
     </application>
 
