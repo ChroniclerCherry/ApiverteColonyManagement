@@ -1,10 +1,7 @@
 package com.example.apiverte_colony_management;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +11,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.apiverte_colony_management.layout.Inspection;
-import com.example.apiverte_colony_management.layout.MyAppDatabase;
-import com.example.apiverte_colony_management.layout.Inspection;
+import com.example.apiverte_colony_management.room_db.Inspection;
+import com.example.apiverte_colony_management.room_db.MyAppDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

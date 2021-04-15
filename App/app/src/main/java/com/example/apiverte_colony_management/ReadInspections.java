@@ -3,17 +3,12 @@ package com.example.apiverte_colony_management;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.apiverte_colony_management.layout.Inspection;
+import com.example.apiverte_colony_management.room_db.Inspection;
 
 import java.util.List;
-import java.util.UUID;
 
 
 public class ReadInspections extends AppCompatActivity {
