@@ -29,10 +29,9 @@
 
     <string name="manage_special_inspection">Manage Special Inspection</string>
     <string name="delete_from_database">Delete From Database</string>
-
-
     -------------
 
+  
     ---Dan---
     <string name="createColonyPageHeader">Add New Colony</string>
     <string name="createColonyPageInputHint">Enter data here</string>
@@ -60,6 +59,7 @@
     <string name="createColonyPageSubmitMessage">Colony Created!</string>
     -------------
 
+
     ---Alex---
     <string name="action_settings">Settings</string>
     <string name="areaSpinner">"Area "</string>
@@ -67,4 +67,18 @@
     <string name="spinnerHiveNumber">Hive Number</string>
     <string name="spinnerColonyNumber">Colony Number</string>
     -------------
+
+    ---Server Sync---
+    <string name="UpdateButton">Update with server</string>
+    <string name="BeginSync">Put in the server URL and click the button to begin synchronizing data with the server. This may take a while</string>
+    <string name="SyncingUsers">Synchronizing User data...</string>
+    <string name="SyncingAreas">Synchronizing Area data...</string>
+    <string name="SyncingHost">Synchronizing Host data...</string>
+    <string name="SyncingColonies">Synchronizing Colony data...</string>
+    <string name="SyncingTypical">Synchronizing Typical Inspection data...</string>
+    <string name="SyncingSpecial">Synchronizing Special Inspection data...</string>
+    <string name="SyncingDone">Everything is up to date!</string>
+    <string name="SyncingError">An error has occurred.</string>
+    -------------
+
 </resources>

@@ -3,13 +3,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Server.DataModels;
-using Server.DataModels.Colony;
 
-namespace Server.Commands.AddLookups
+namespace Server.CQS.Commands.Host
 {
     public class AddHostCommand : IRequest<Guid>
     {
+        public Guid Id;
         public string Name { get; set; }
+
+        public bool IsActive { get; set; }
 
         public class AddHostCommandHandler : IRequestHandler<AddHostCommand, Guid>
         {
@@ -21,9 +23,11 @@ namespace Server.Commands.AddLookups
             }
             public async Task<Guid> Handle(AddHostCommand request, CancellationToken cancellationToken)
             {
-                var host = new Host()
+                var host = new DataModels.Colony.Host()
                 {
-                    Name = request.Name
+                    Id = request.Id,
+                    Name = request.Name,
+                    IsActive = request.IsActive
                 };
                 await _db.Host.AddAsync(host, cancellationToken);
                 _db.SaveChanges();

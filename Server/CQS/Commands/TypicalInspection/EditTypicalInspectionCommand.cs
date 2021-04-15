@@ -3,9 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.TypicalInspection
 {
     public class EditTypicalInspectionCommand : IRequest<Guid>
     {

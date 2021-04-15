@@ -6,7 +6,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.Queries.DTOs;
 
 namespace Server.CQS.Queries
 {
@@ -26,6 +25,10 @@ namespace Server.CQS.Queries
                 {
                     Id = c.Id,
                     IsActive = c.IsActive,
+                    CreatedBy = c.CreatedBy,
+                    CreatedDate = c.CreatedDate,
+                    LastModifiedBy = c.LastModifiedBy,
+                    LastModifiedDate = c.LastModifiedDate,
                     HostId = c.HostId,
                     AreaId = c.AreaId,
                     HiveNumber = c.HiveNumber,

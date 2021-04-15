@@ -11,9 +11,9 @@ namespace Server.DataModels
     {
         public Guid Id { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public long LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
         public string Name { get; set; }
 
@@ -34,9 +34,9 @@ namespace Server.DataModels
             builder.Property(user => user.LastModifiedBy)
                 .HasDefaultValue("System");
             builder.Property(user => user.CreatedDate)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValue(DateTime.Now.Ticks);
             builder.Property(user => user.LastModifiedDate)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValue(DateTime.Now.Ticks);
         }
     }
 }

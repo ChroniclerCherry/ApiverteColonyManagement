@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.DataModels.Colony;
 
-namespace Server.CQS.Commands
+namespace Server.CQS.Commands.Colony
 {
     public class AddColonyCommand : IRequest<Guid>
     {
@@ -21,7 +20,7 @@ namespace Server.CQS.Commands
             }
             public async Task<Guid> Handle(AddColonyCommand request, CancellationToken cancellationToken)
             {
-                var colony = new Colony()
+                var colony = new DataModels.Colony.Colony()
                 {
                     Id = request.ColonyDto.Id,
                     IsActive = request.ColonyDto.IsActive,

@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Server.Commands.AddLookups;
-using Server.Commands.EditLookups;
 using Server.CQS.Commands;
+using Server.CQS.Commands.Area;
+using Server.CQS.Commands.Colony;
+using Server.CQS.Commands.Host;
+using Server.CQS.Commands.User;
 using Server.CQS.DTOs;
 using Server.CQS.Queries;
-using Server.Queries.GetLookups;
 
 namespace Server.Controllers
 {
     [Route("[controller]")]
-    public class ColonyController : ControllerBase
+    public class ColonyController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private IMediator _mediator;
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
@@ -39,24 +41,36 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost, Route("GetColonies")]
+        [HttpGet, Route("GetColonies")]
         public async Task<IActionResult> GetColonies()
         {
             var result = await Mediator.Send(new GetColoniesQuery());
             return Ok(result);
         }
 
-        [HttpPost, Route("AddHost")]
-        public async Task<IActionResult> AddHost(string name)
+        [HttpPost, Route("SyncColony")]
+        public async Task<IActionResult> SyncHSyncColonyost([FromBody] List<ColonyDto> colonies)
         {
-            var result = await Mediator.Send(new AddHostCommand()
+            var result = await Mediator.Send(new SyncColonyCommand()
             {
-                Name = name
+                Colonies = colonies
             });
             return Ok(result);
         }
 
-        [HttpPost, Route("GetHosts")]
+        [HttpPost, Route("AddHost")]
+        public async Task<IActionResult> AddHost(Guid id, string name, bool isActive = true)
+        {
+            var result = await Mediator.Send(new AddHostCommand()
+            {
+                Id = id,
+                Name = name,
+                IsActive = isActive
+            });
+            return Ok(result);
+        }
+
+        [HttpGet, Route("GetHosts")]
         public async Task<IActionResult> GetHosts()
         {
             var result = await Mediator.Send(new GetHostsQuery());
@@ -64,29 +78,42 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditHost")]
-        public async Task<IActionResult> EditHost(Guid id, string name)
+        public async Task<IActionResult> EditHost(Guid id, string name, bool isActive = true)
         {
             var result = await Mediator.Send(new EditHostCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
 
             if (result == Guid.Empty) return NotFound();
             return Ok(result);
         }
 
-        [HttpPost, Route("AddArea")]
-        public async Task<IActionResult> AddArea(string name)
+        [HttpPost, Route("SyncHost")]
+        public async Task<IActionResult> SyncHost([FromBody] List<LookupDto> hosts)
         {
-            var result = await Mediator.Send(new AddAreaCommand()
+            var result = await Mediator.Send(new SyncHostCommand()
             {
-                Name = name
+                Hosts = hosts
             });
             return Ok(result);
         }
 
-        [HttpPost, Route("GetAreas")]
+        [HttpPost, Route("AddArea")]
+        public async Task<IActionResult> AddArea(Guid id, string name, bool isActive = true)
+        {
+            var result = await Mediator.Send(new AddAreaCommand()
+            {
+                Id = id,
+                Name = name,
+                IsActive = isActive
+            });
+            return Ok(result);
+        }
+
+        [HttpGet, Route("GetAreas")]
         public async Task<IActionResult> GetAreas()
         {
             var result = await Mediator.Send(new GetAreasQuery());
@@ -94,15 +121,26 @@ namespace Server.Controllers
         }
 
         [HttpPost, Route("EditArea")]
-        public async Task<IActionResult> EditArea(Guid id,string name)
+        public async Task<IActionResult> EditArea(Guid id,string name, bool isActive = true)
         {
             var result = await Mediator.Send(new EditAreaCommand()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                IsActive = isActive
             });
 
             if (result == Guid.Empty) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPost, Route("SyncArea")]
+        public async Task<IActionResult> SyncArea([FromBody] List<LookupDto> areas)
+        {
+            var result = await Mediator.Send(new SyncAreaCommand()
+            {
+                Areas = areas
+            });
             return Ok(result);
         }
 

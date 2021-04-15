@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.CQS.DTOs;
 using Server.DataModels;
-using Server.Queries.DTOs;
 
 namespace Server.CQS.Queries
 {
@@ -25,7 +25,11 @@ namespace Server.CQS.Queries
                 {
                     Id = a.Id,
                     Name = a.Name,
-                    IsActive = a.IsActive
+                    IsActive = a.IsActive,
+                    CreatedBy = a.CreatedBy,
+                    CreatedDate = a.CreatedDate,
+                    LastModifiedBy = a.LastModifiedBy,
+                    LastModifiedDate = a.LastModifiedDate,
                 }).ToListAsync(cancellationToken: cancellationToken);
             }
         }

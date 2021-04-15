@@ -5,27 +5,30 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.DataModels;
 
-namespace Server.Commands.EditLookups
+namespace Server.CQS.Commands.Host
 {
-    public class EditAreaCommand : IRequest<Guid>
+    public class EditHostCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public class EditAreaCommandHandler : IRequestHandler<EditAreaCommand, Guid>
+        public bool IsActive { get; set; }
+
+        public class EditHostCommandHandler : IRequestHandler<EditHostCommand, Guid>
         {
             private readonly Context _db;
 
-            public EditAreaCommandHandler(Context db)
+            public EditHostCommandHandler(Context db)
             {
                 _db = db;
             }
-            public async Task<Guid> Handle(EditAreaCommand request, CancellationToken cancellationToken)
+            public async Task<Guid> Handle(EditHostCommand request, CancellationToken cancellationToken)
             {
-                var area = await _db.Area.FirstOrDefaultAsync(a => a.Id == request.Id);
+                var area = await _db.Host.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken: cancellationToken);
                 if (area == null) return Guid.Empty;
 
                 area.Name = request.Name;
+                area.IsActive = request.IsActive;
                 _db.SaveChanges();
 
                 return area.Id;
